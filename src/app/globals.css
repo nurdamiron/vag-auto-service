@@ -1,26 +1,204 @@
 @import "tailwindcss";
 
+/* Camber design tokens — from Framer template neat-room-613097 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #0b1b2b;
+  --navy-mid: #10263f;
+  --slate: #45566b;
+  --orange: #ea5a1e;
+  --orange-dark: #c74712;
+  --white: #ffffff;
+  --bg: #f4f6f9;
+  --border: #e4e9ef;
+  --muted: #b9c6d6;
+  --soft: #c9d4de;
+  --radius: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --shadow: 0 20px 50px -24px rgb(11 27 43 / 0.35);
+  --shadow-soft: 0 10px 28px -16px rgb(11 27 43 / 0.18);
+  --container: 72rem;
+  --header-h: 4.5rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: var(--navy);
+  --color-navy-mid: var(--navy-mid);
+  --color-slate: var(--slate);
+  --color-orange: var(--orange);
+  --color-orange-dark: var(--orange-dark);
+  --color-bg: var(--bg);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-soft: var(--soft);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-archivo);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--white);
+  color: var(--navy);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--orange) 28%, transparent);
+  color: var(--navy);
+}
+
+.site-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--container);
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .site-container {
+    padding-inline: 1.75rem;
+  }
+}
+
+.section-pad {
+  padding-block: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-block: 5.5rem;
+  }
+}
+
+.type-display {
+  font-family: var(--font-archivo), var(--font-inter), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: var(--orange);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.875rem 1.5rem;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 8px 24px -10px rgb(234 90 30 / 0.65);
+}
+
+.btn-primary:hover {
+  background: var(--orange-dark);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.875rem 1.5rem;
+  border: 1.5px solid rgb(255 255 255 / 0.35);
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.btn-secondary:hover {
+  background: rgb(255 255 255 / 0.08);
+  border-color: rgb(255 255 255 / 0.55);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.35rem;
+  border: 1.5px solid var(--border);
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+
+.btn-outline:hover {
+  border-color: var(--navy);
+  background: var(--bg);
+  transform: translateY(-1px);
+}
+
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: var(--navy);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.875rem 1.5rem;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn-dark:hover {
+  background: var(--navy-mid);
+  transform: translateY(-1px);
+}
+
+.surface-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.surface-card-hover {
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.surface-card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: color-mix(in oklab, var(--orange) 25%, var(--border));
+}
+
+.prose-site p {
+  color: var(--slate);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.prose-site p:last-child {
+  margin-bottom: 0;
 }

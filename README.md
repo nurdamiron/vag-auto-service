@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VAG Auto Service
 
-## Getting Started
+Сайт автосервиса **VAG Auto Service** (Алматы) — клон дизайна Framer-шаблона [Camber](https://neat-room-613097.framer.app/) на **Next.js + React + Tailwind CSS**.
 
-First, run the development server:
+## Данные бизнеса (2ГИС)
+
+- **Адрес:** ул. Цветочная, 1/1, бокс 8, мкр. Таугуль, Алматы  
+- **Телефон / WhatsApp:** +7 707 405 69 07  
+- **Email:** baigozy@mail.ru  
+- **Рейтинг:** 4.8 (100+ оценок)  
+- **2ГИС:** https://2gis.kz/almaty/firm/70000001068542185  
+
+## Стек
+
+- Next.js (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- Lucide icons
+
+## Дизайн (Camber tokens)
+
+| Token   | Value     |
+|---------|-----------|
+| Navy    | `#0b1b2b` |
+| Orange  | `#ea5a1e` |
+| Slate   | `#45566b` |
+| BG      | `#f4f6f9` |
+| Fonts   | Archivo + Inter |
+
+## Запуск
 
 ```bash
+cd vag-auto-service
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Структура
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/                 # страницы: /, /services, /about, /blog, /contact
+  components/site/     # Header, Footer, forms, FAQ…
+  components/motion/   # Reveal, Stagger
+  lib/data.ts          # контент и контакты
+```
 
-## Learn More
+## Скрипты
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run dev` — dev-сервер  
+- `npm run build` — production build  
+- `npm run start` — запуск production  
+- `npm run lint` — ESLint  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Контент и цены в `src/lib/data.ts` — правьте под актуальный прайс сервиса.
