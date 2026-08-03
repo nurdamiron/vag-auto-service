@@ -14,6 +14,7 @@ import { StaggerGrid, StaggerItem } from "@/components/motion/Stagger";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { EmergencyBanner } from "@/components/site/EmergencyBanner";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
+import { ContactForm } from "@/components/site/ContactForm";
 import {
   blogPosts,
   business,
@@ -37,7 +38,7 @@ const aboutImage =
 export default function HomePage() {
   return (
     <>
-      <section className="relative min-h-[92vh] overflow-hidden bg-navy pt-[var(--header-h)]">
+      <section className="relative overflow-hidden bg-navy pt-[var(--header-h)]">
         <Image
           src={heroImage}
           alt="VAG Auto Service — диагностика и ремонт в Алматы"
@@ -46,77 +47,88 @@ export default function HomePage() {
           className="object-cover opacity-35"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/92 to-navy/70" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(234,90,30,0.18),transparent_50%)]" />
 
-        <div className="site-container relative flex min-h-[calc(92vh-var(--header-h))] flex-col justify-center py-16 md:py-24">
-          <Reveal>
-            <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-white/85 backdrop-blur">
-              <Star className="h-4 w-4 shrink-0 fill-orange text-orange" />
-              <span className="truncate">{heroCopy.eyebrow}</span>
-            </div>
-          </Reveal>
+        <div className="site-container relative grid items-center gap-10 py-12 md:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-20">
+          <div>
+            <Reveal>
+              <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-white/85 backdrop-blur">
+                <Star className="h-4 w-4 shrink-0 fill-orange text-orange" />
+                <span className="truncate">{heroCopy.eyebrow}</span>
+              </div>
+            </Reveal>
 
-          <Reveal delay={0.05}>
-            <h1 className="type-display mt-6 max-w-3xl text-3xl text-white sm:text-5xl md:text-6xl lg:text-[3.5rem] lg:leading-[1.08]">
-              {heroCopy.title}
-            </h1>
-          </Reveal>
+            <Reveal delay={0.05}>
+              <h1 className="type-display mt-5 max-w-2xl text-3xl text-white sm:text-4xl md:text-5xl lg:text-[3.15rem] lg:leading-[1.08]">
+                {heroCopy.title}
+              </h1>
+            </Reveal>
 
-          <Reveal delay={0.1}>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-              {heroCopy.subtitle}
-            </p>
-          </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+                {heroCopy.subtitle}
+              </p>
+            </Reveal>
 
-          <Reveal delay={0.15}>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={waLink()}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary"
-              >
-                {heroCopy.ctaPrimary}
-              </a>
-              <a href={telLink()} className="btn-secondary">
-                {heroCopy.ctaSecondary} {business.phoneDisplay}
-              </a>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/70">
-              <span className="inline-flex items-center gap-2">
-                <Wrench className="h-4 w-4 text-orange" />
-                VW · Audi · Skoda · Porsche
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Shield className="h-4 w-4 text-orange" />
-                Без навязанного ремонта
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Clock className="h-4 w-4 text-orange" />
-                {business.hoursShort} каждый день
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-orange" />
-                {business.address}
-              </span>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.25}>
-            <div className="mt-12 grid max-w-3xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {trustBadges.map((b) => (
-                <div
-                  key={b}
-                  className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white/85 backdrop-blur"
+            <Reveal delay={0.15}>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href="#zapis" className="btn-primary lg:hidden">
+                  Записаться
+                </a>
+                <a href={telLink()} className="btn-secondary">
+                  {heroCopy.ctaSecondary} {business.phoneDisplay}
+                </a>
+                <a
+                  href={waLink()}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-secondary hidden sm:inline-flex"
                 >
-                  <BadgeCheck className="h-4 w-4 shrink-0 text-orange" />
-                  {b}
-                </div>
-              ))}
+                  {heroCopy.ctaPrimary}
+                </a>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.2}>
+              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-sm text-white/70">
+                <span className="inline-flex items-center gap-2">
+                  <Wrench className="h-4 w-4 text-orange" />
+                  VW · Audi · Skoda · Porsche
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Shield className="h-4 w-4 text-orange" />
+                  Без навязанного ремонта
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-orange" />
+                  {business.hoursShort} каждый день
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-orange" />
+                  {business.address}
+                </span>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.25}>
+              <div className="mt-8 grid max-w-xl gap-2 sm:grid-cols-2">
+                {trustBadges.slice(0, 4).map((b) => (
+                  <div
+                    key={b}
+                    className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/85 backdrop-blur"
+                  >
+                    <BadgeCheck className="h-4 w-4 shrink-0 text-orange" />
+                    {b}
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.12}>
+            <div id="zapis" className="scroll-mt-28 lg:scroll-mt-24">
+              <ContactForm variant="compact" source="главная — hero" />
             </div>
           </Reveal>
         </div>

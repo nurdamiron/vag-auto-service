@@ -125,7 +125,7 @@ export default function ContactPage() {
             <h2 className="type-display mb-4 text-2xl text-navy sm:text-3xl">
               Форма записи
             </h2>
-            <ContactForm />
+            <ContactForm source="страница контактов" />
           </Reveal>
         </div>
       </section>
