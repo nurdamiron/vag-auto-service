@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { StaggerGrid, StaggerItem } from "@/components/motion/Stagger";
-import { business, whyUs, trustBadges, waLink } from "@/lib/data";
+import { brands, business, whyUs, trustBadges, waLink } from "@/lib/data";
 import { BadgeCheck } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="О сервисе"
-        title="VAG Auto Service — для тех, кто ездит на VW, Audi и Skoda"
+        title="VAG Auto Service — немцы и корейцы в одном боксе"
         text={`${business.tagline}. Работаем в Алматы, мкр. Таугуль. Рейтинг ★ ${business.rating} и ${business.reviewCount}+ оценок на 2ГИС.`}
         crumbs={[
           { href: "/", label: "Главная" },
@@ -52,14 +52,20 @@ export default function AboutPage() {
             <p className="mt-4 text-base leading-relaxed text-slate">
               Клиенты приезжают, когда в других местах «не нашли», предложили
               менять половину машины или просто сбросили ошибку. Мы копаем
-              глубже: компьютерная диагностика VAG, ходовая, двигатель, КПП,
-              электрика — с объяснением на понятном языке.
+              глубже: электронно-компьютерная диагностика по мотору, ходовке,
+              коробке и малярке — с объяснением на понятном языке.
             </p>
             <p className="mt-3 text-base leading-relaxed text-slate">
               В отзывах чаще всего благодарят за то, что{" "}
               <strong className="text-navy">не навязывают лишнее</strong>,
               делают в срок и по адекватной цене. Есть постоянные клиенты с
-              Passat, Golf, Polo, Octavia, Rapid и другими моделями концерна.
+              Passat, Golf, Polo, Octavia, Rapid — и с Rio, Cerato, Sportage,
+              Accent, Tucson, Creta.
+            </p>
+            <p className="mt-3 text-base leading-relaxed text-slate">
+              Ремонт и малярные работы делаем на месте: не нужно возить машину
+              по трём подрядчикам — диагностика, механика и покраска идут одной
+              сметой.
             </p>
             <p className="mt-3 text-base leading-relaxed text-slate">
               Ориентир по возрасту авто — примерно с{" "}
@@ -115,17 +121,15 @@ export default function AboutPage() {
               Марки в приоритете
             </h2>
             <p className="mt-4 text-slate leading-relaxed">
-              Как в карточке 2ГИС: Volkswagen, Audi, Skoda, Porsche, Bentley.
-              Плюс помощь с подбором запчастей — это тоже отмечают клиенты.
+              Концерн VAG — Volkswagen, Audi, Skoda, Porsche, Bentley. Плюс
+              отдельное направление по корейским маркам: Kia и Hyundai. И помощь
+              с подбором запчастей — это тоже отмечают клиенты.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
-              {business.brands.map((b) => (
-                <span
-                  key={b}
-                  className="rounded-full border border-border bg-bg px-4 py-2 text-sm font-semibold text-navy"
-                >
-                  {b}
-                </span>
+              {brands.map((b) => (
+                <Link key={b.slug} href={`/brands/${b.slug}`} className="chip">
+                  {b.name}
+                </Link>
               ))}
             </div>
             <ul className="mt-8 space-y-2.5">

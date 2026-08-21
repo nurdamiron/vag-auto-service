@@ -5,18 +5,27 @@ import {
   BadgeCheck,
   Clock,
   MapPin,
+  Quote,
   Shield,
   Star,
   Wrench,
 } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { StaggerGrid, StaggerItem } from "@/components/motion/Stagger";
+import { SpotlightCard } from "@/components/motion/SpotlightCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { EmergencyBanner } from "@/components/site/EmergencyBanner";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { ContactForm } from "@/components/site/ContactForm";
+import { BrandMarquee } from "@/components/site/BrandMarquee";
+import { BrandCard } from "@/components/site/BrandCard";
+import { DiagAreas } from "@/components/site/DiagAreas";
+import { ServiceCard } from "@/components/site/ServiceCard";
+import { StatsStrip } from "@/components/site/StatsStrip";
 import {
   blogPosts,
+  brandGroups,
+  brandsByGroup,
   business,
   heroCopy,
   reviews,
@@ -30,29 +39,33 @@ import {
   whyUs,
 } from "@/lib/data";
 
-const heroImage =
-  "https://framerusercontent.com/images/WR9o7KR6Qr7BCVUh8m9Gs2Nm0RY.jpg";
+const heroImage = "/images/hero-auto-service.jpg";
 const aboutImage =
   "https://framerusercontent.com/images/g4JKIXKxUHdkYwtBbzHXNpFaPdg.jpg";
 
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-navy pt-[var(--header-h)]">
+      {/* ---------------------------------------------------------- */}
+      {/*  Hero                                                       */}
+      {/* ---------------------------------------------------------- */}
+      <section className="grain relative overflow-hidden bg-navy pt-[var(--header-h)]">
         <Image
           src={heroImage}
-          alt="VAG Auto Service — диагностика и ремонт в Алматы"
+          alt="VAG Auto Service — автосервис, диагностика и ремонт"
           fill
           priority
-          className="object-cover opacity-35"
+          className="object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/92 to-navy/70" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(234,90,30,0.18),transparent_50%)]" />
+        {/* Затемнение слева, чтобы текст читался поверх фото */}
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/88 via-navy/55 to-navy/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/10 to-navy/35" />
+        <div className="grid-lines pointer-events-none absolute inset-0" />
 
         <div className="site-container relative grid items-center gap-10 py-12 md:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-20">
           <div>
-            <Reveal>
+            <Reveal from="none">
               <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-white/85 backdrop-blur">
                 <Star className="h-4 w-4 shrink-0 fill-orange text-orange" />
                 <span className="truncate">{heroCopy.eyebrow}</span>
@@ -60,19 +73,27 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={0.05}>
-              <h1 className="type-display mt-5 max-w-2xl text-3xl text-white sm:text-4xl md:text-5xl lg:text-[3.15rem] lg:leading-[1.08]">
-                {heroCopy.title}
+              <h1 className="type-display mt-5 max-w-2xl text-3xl text-white sm:text-4xl md:text-5xl lg:text-[3.3rem] lg:leading-[1.06]">
+                {heroCopy.titleLead}{" "}
+                {/* Запятая внутри nowrap-обёртки, иначе уезжает на новую строку */}
+                <span className="whitespace-nowrap">
+                  <span className="accent-underline">
+                    {heroCopy.titleAccent}
+                  </span>
+                  ,
+                </span>{" "}
+                {heroCopy.titleTail}
               </h1>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
                 {heroCopy.subtitle}
               </p>
             </Reveal>
 
             <Reveal delay={0.15}>
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-7 flex flex-wrap gap-3">
                 <a href="#zapis" className="btn-primary lg:hidden">
                   Записаться
                 </a>
@@ -94,11 +115,11 @@ export default function HomePage() {
               <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-sm text-white/70">
                 <span className="inline-flex items-center gap-2">
                   <Wrench className="h-4 w-4 text-orange" />
-                  VW · Audi · Skoda · Porsche
+                  VW · Audi · Skoda · Kia · Hyundai
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Shield className="h-4 w-4 text-orange" />
-                  Без навязанного ремонта
+                  Смета до начала работ
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Clock className="h-4 w-4 text-orange" />
@@ -116,7 +137,7 @@ export default function HomePage() {
                 {trustBadges.slice(0, 4).map((b) => (
                   <div
                     key={b}
-                    className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/85 backdrop-blur"
+                    className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/85 backdrop-blur transition-colors hover:border-orange/40"
                   >
                     <BadgeCheck className="h-4 w-4 shrink-0 text-orange" />
                     {b}
@@ -126,14 +147,53 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.12}>
+          <Reveal delay={0.12} from="right">
             <div id="zapis" className="scroll-mt-28 lg:scroll-mt-24">
               <ContactForm variant="compact" source="главная — hero" />
             </div>
           </Reveal>
         </div>
+
+        <div className="site-container relative">
+          <StatsStrip />
+        </div>
       </section>
 
+      <BrandMarquee />
+
+      {/* ---------------------------------------------------------- */}
+      {/*  Диагностика по направлениям                                */}
+      {/* ---------------------------------------------------------- */}
+      <section className="section-pad">
+        <div className="site-container">
+          <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+            <Reveal>
+              <SectionHeading
+                eyebrow={sectionsCopy.diagEyebrow}
+                title={sectionsCopy.diagTitle}
+                text={sectionsCopy.diagText}
+              />
+            </Reveal>
+            <Reveal delay={0.05}>
+              <Link
+                href="/services/computer-diagnostics"
+                className="btn-outline shrink-0"
+              >
+                О диагностике
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Reveal>
+          </div>
+
+          <div className="mt-10">
+            <DiagAreas />
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------- */}
+      {/*  Услуги                                                     */}
+      {/* ---------------------------------------------------------- */}
       <section className="section-pad bg-bg">
         <div className="site-container">
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
@@ -153,44 +213,64 @@ export default function HomePage() {
           </div>
 
           <StaggerGrid className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
+            {services.map((s, i) => (
               <StaggerItem key={s.slug}>
-                <Link
-                  href={`/services/${s.slug}`}
-                  className="surface-card surface-card-hover group flex h-full flex-col overflow-hidden"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image
-                      src={s.image}
-                      alt={s.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                      sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="type-display text-xl text-navy">{s.title}</h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-slate">
-                      {s.short}
-                    </p>
-                    <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
-                      <span className="text-sm font-semibold text-orange">
-                        {s.priceFrom}
-                      </span>
-                      <span className="inline-flex items-center gap-1 text-sm font-medium text-navy group-hover:text-orange">
-                        Подробнее
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
+                <ServiceCard service={s} index={i} />
               </StaggerItem>
             ))}
           </StaggerGrid>
         </div>
       </section>
 
+      {/* ---------------------------------------------------------- */}
+      {/*  Марки: VAG + Корея                                         */}
+      {/* ---------------------------------------------------------- */}
       <section className="section-pad">
+        <div className="site-container">
+          <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+            <Reveal>
+              <SectionHeading
+                eyebrow={sectionsCopy.brandsEyebrow}
+                title={sectionsCopy.brandsTitle}
+                text={sectionsCopy.brandsText}
+              />
+            </Reveal>
+            <Reveal delay={0.05}>
+              <Link href="/brands" className="btn-outline shrink-0">
+                Все марки
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Reveal>
+          </div>
+
+          <div className="mt-10 space-y-10">
+            {brandGroups.map((group) => (
+              <div key={group.id}>
+                <Reveal>
+                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border pb-3">
+                    <h3 className="type-display text-xl text-navy">
+                      {group.label}
+                    </h3>
+                    <p className="text-sm text-slate">{group.text}</p>
+                  </div>
+                </Reveal>
+                <StaggerGrid className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {brandsByGroup(group.id).map((brand) => (
+                    <StaggerItem key={brand.slug}>
+                      <BrandCard brand={brand} />
+                    </StaggerItem>
+                  ))}
+                </StaggerGrid>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------- */}
+      {/*  Почему к нам едут                                          */}
+      {/* ---------------------------------------------------------- */}
+      <section className="section-pad bg-bg">
         <div className="site-container">
           <Reveal>
             <SectionHeading
@@ -202,7 +282,7 @@ export default function HomePage() {
           <StaggerGrid className="mt-10 grid gap-4 md:grid-cols-3">
             {specials.map((sp) => (
               <StaggerItem key={sp.title}>
-                <Link
+                <SpotlightCard
                   href="/contact"
                   className="surface-card surface-card-hover flex h-full flex-col p-6"
                 >
@@ -218,17 +298,21 @@ export default function HomePage() {
                   <p className="mt-5 rounded-lg bg-bg px-3 py-2 text-xs font-medium text-slate">
                     {sp.code}
                   </p>
-                </Link>
+                </SpotlightCard>
               </StaggerItem>
             ))}
           </StaggerGrid>
         </div>
       </section>
 
-      <section className="section-pad bg-navy text-white">
-        <div className="site-container">
+      {/* ---------------------------------------------------------- */}
+      {/*  Сервис, который шарит                                      */}
+      {/* ---------------------------------------------------------- */}
+      <section className="grain relative overflow-hidden bg-navy text-white section-pad">
+        <div className="grid-lines pointer-events-none absolute inset-0" />
+        <div className="site-container relative">
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <Reveal>
+            <Reveal from="left">
               <div>
                 <p className="eyebrow">{sectionsCopy.whyEyebrow}</p>
                 <h2 className="type-display mt-3 text-3xl sm:text-4xl md:text-[2.75rem]">
@@ -237,24 +321,25 @@ export default function HomePage() {
                 <p className="mt-4 text-base leading-relaxed text-white/70">
                   {sectionsCopy.whyText}
                 </p>
-                <div className="relative mt-8 aspect-[4/3] overflow-hidden rounded-2xl">
+                <div className="group relative mt-8 aspect-[4/3] overflow-hidden rounded-2xl">
                   <Image
                     src={aboutImage}
                     alt="Работа на VAG Auto Service"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                     sizes="(min-width:1024px) 50vw, 100vw"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
                 </div>
               </div>
             </Reveal>
 
             <div className="space-y-5">
               {whyUs.map((item, i) => (
-                <Reveal key={item.num} delay={i * 0.06}>
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur sm:p-6">
+                <Reveal key={item.num} delay={i * 0.06} from="right">
+                  <div className="surface-dark p-5 sm:p-6">
                     <div className="flex items-start gap-4">
-                      <span className="type-display text-2xl text-orange">
+                      <span className="type-numeral text-3xl text-orange">
                         {item.num}
                       </span>
                       <div>
@@ -277,7 +362,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-pad bg-bg">
+      {/* ---------------------------------------------------------- */}
+      {/*  Как попасть — таймлайн                                     */}
+      {/* ---------------------------------------------------------- */}
+      <section className="section-pad">
         <div className="site-container">
           <Reveal>
             <SectionHeading
@@ -285,29 +373,40 @@ export default function HomePage() {
               title={sectionsCopy.stepsTitle}
             />
           </Reveal>
-          <StaggerGrid className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step) => (
-              <StaggerItem key={step.n}>
-                <div className="surface-card h-full p-6">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-orange text-sm font-bold text-white">
-                    {step.n}
-                  </span>
-                  <h3 className="type-display mt-4 text-xl text-navy">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate">
-                    {step.text}
-                  </p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerGrid>
+
+          <div className="relative mt-12">
+            {/* Линия таймлайна на десктопе */}
+            <div
+              aria-hidden
+              className="absolute left-0 right-0 top-5 hidden h-px bg-gradient-to-r from-border via-orange/40 to-border lg:block"
+            />
+            <StaggerGrid className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+              {steps.map((step) => (
+                <StaggerItem key={step.n}>
+                  <div className="relative">
+                    <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-orange text-sm font-bold text-white ring-8 ring-white">
+                      {step.n}
+                    </span>
+                    <h3 className="type-display mt-5 text-xl text-navy">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate">
+                      {step.text}
+                    </p>
+                  </div>
+                </StaggerItem>
+              ))}
+            </StaggerGrid>
+          </div>
         </div>
       </section>
 
       <EmergencyBanner />
 
-      <section className="section-pad">
+      {/* ---------------------------------------------------------- */}
+      {/*  Отзывы                                                     */}
+      {/* ---------------------------------------------------------- */}
+      <section className="section-pad bg-bg">
         <div className="site-container">
           <Reveal>
             <SectionHeading
@@ -319,16 +418,20 @@ export default function HomePage() {
           <StaggerGrid className="mt-10 grid gap-4 md:grid-cols-3">
             {reviews.map((r) => (
               <StaggerItem key={r.name}>
-                <blockquote className="surface-card flex h-full flex-col p-6">
-                  <div className="flex gap-0.5 text-orange">
+                <blockquote className="surface-card surface-card-hover relative flex h-full flex-col overflow-hidden p-6">
+                  <Quote
+                    aria-hidden
+                    className="absolute -right-2 -top-2 h-20 w-20 rotate-180 fill-orange/[0.06] text-transparent"
+                  />
+                  <div className="relative flex gap-0.5 text-orange">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star key={i} className="h-4 w-4 fill-orange" />
                     ))}
                   </div>
-                  <p className="mt-4 flex-1 text-base leading-relaxed text-navy/90">
+                  <p className="relative mt-4 flex-1 text-base leading-relaxed text-navy/90">
                     “{r.text}”
                   </p>
-                  <footer className="mt-5 border-t border-border pt-4">
+                  <footer className="relative mt-5 border-t border-border pt-4">
                     <p className="font-semibold text-navy">{r.name}</p>
                     <p className="text-sm text-slate">{r.source}</p>
                   </footer>
@@ -352,10 +455,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-pad bg-bg">
+      {/* ---------------------------------------------------------- */}
+      {/*  FAQ                                                        */}
+      {/* ---------------------------------------------------------- */}
+      <section className="section-pad">
         <div className="site-container">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
-            <Reveal>
+            <Reveal from="left">
               <SectionHeading
                 eyebrow={sectionsCopy.faqEyebrow}
                 title={sectionsCopy.faqTitle}
@@ -375,14 +481,17 @@ export default function HomePage() {
                 </a>
               </div>
             </Reveal>
-            <Reveal delay={0.05}>
+            <Reveal delay={0.05} from="right">
               <FaqAccordion />
             </Reveal>
           </div>
         </div>
       </section>
 
-      <section className="section-pad">
+      {/* ---------------------------------------------------------- */}
+      {/*  Блог                                                       */}
+      {/* ---------------------------------------------------------- */}
+      <section className="section-pad bg-bg">
         <div className="site-container">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <Reveal>
@@ -399,9 +508,9 @@ export default function HomePage() {
             </Reveal>
           </div>
           <StaggerGrid className="mt-10 grid gap-4 md:grid-cols-3">
-            {blogPosts.map((post) => (
+            {blogPosts.slice(0, 3).map((post) => (
               <StaggerItem key={post.slug}>
-                <Link
+                <SpotlightCard
                   href={`/blog/${post.slug}`}
                   className="surface-card surface-card-hover group flex h-full flex-col overflow-hidden"
                 >
@@ -410,7 +519,7 @@ export default function HomePage() {
                       src={post.image}
                       alt={post.title}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                       sizes="(min-width:768px) 33vw, 100vw"
                     />
                   </div>
@@ -425,22 +534,26 @@ export default function HomePage() {
                         {post.date}
                       </time>
                     </div>
-                    <h3 className="type-display mt-2 text-xl text-navy group-hover:text-orange">
+                    <h3 className="type-display mt-2 text-xl text-navy transition-colors group-hover:text-orange">
                       {post.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-slate">
                       {post.excerpt}
                     </p>
                   </div>
-                </Link>
+                </SpotlightCard>
               </StaggerItem>
             ))}
           </StaggerGrid>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-navy section-pad">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(234,90,30,0.2),transparent_60%)]" />
+      {/* ---------------------------------------------------------- */}
+      {/*  Финальный CTA                                              */}
+      {/* ---------------------------------------------------------- */}
+      <section className="grain relative overflow-hidden bg-navy section-pad">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(234,90,30,0.22),transparent_62%)]" />
+        <div className="grid-lines pointer-events-none absolute inset-0" />
         <div className="site-container relative text-center">
           <Reveal>
             <h2 className="type-display text-3xl text-white sm:text-4xl md:text-5xl">
