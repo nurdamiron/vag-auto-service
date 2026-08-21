@@ -2,10 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, SprayCan } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
+import { DiagAreas } from "@/components/site/DiagAreas";
 import {
+  brands,
   getService,
   services,
   telLink,
@@ -53,15 +55,25 @@ export default async function ServiceDetailPage({ params }: Props) {
         <div className="site-container grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
           <div>
             <Reveal>
-              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width:1024px) 60vw, 100vw"
-                  priority
-                />
+              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-navy">
+                {service.image ? (
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width:1024px) 60vw, 100vw"
+                    priority
+                  />
+                ) : (
+                  /* Услуга без фото — дизайн-панель в той же системе */
+                  <>
+                    <div className="stripes-ember absolute inset-0" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(234,90,30,0.35),transparent_60%)]" />
+                    <SprayCan className="absolute bottom-6 left-6 h-12 w-12 text-white/80" />
+                  </>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/55 to-transparent" />
               </div>
             </Reveal>
             <Reveal delay={0.05}>
@@ -86,6 +98,19 @@ export default async function ServiceDetailPage({ params }: Props) {
                   </li>
                 ))}
               </ul>
+            </Reveal>
+
+            <Reveal delay={0.12}>
+              <h2 className="type-display mt-10 text-2xl text-navy">
+                Марки, по которым делаем эту работу
+              </h2>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {brands.map((b) => (
+                  <Link key={b.slug} href={`/brands/${b.slug}`} className="chip">
+                    {b.name}
+                  </Link>
+                ))}
+              </div>
             </Reveal>
           </div>
 
@@ -125,8 +150,28 @@ export default async function ServiceDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {others.length > 0 ? (
+      {slug === "computer-diagnostics" ? (
         <section className="section-pad border-t border-border bg-bg">
+          <div className="site-container">
+            <Reveal>
+              <p className="eyebrow">Направления</p>
+              <h2 className="type-display mt-3 max-w-2xl text-3xl text-navy sm:text-4xl">
+                Четыре направления диагностики
+              </h2>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate">
+                Можно взять одно направление под конкретный симптом или
+                комплексную проверку перед покупкой и дальней дорогой.
+              </p>
+            </Reveal>
+            <div className="mt-10">
+              <DiagAreas />
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {others.length > 0 ? (
+        <section className="section-pad border-t border-border">
           <div className="site-container">
             <h2 className="type-display text-2xl text-navy sm:text-3xl">
               Другие услуги

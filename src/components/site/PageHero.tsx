@@ -12,8 +12,9 @@ type Props = {
 
 export function PageHero({ eyebrow, title, text, crumbs }: Props) {
   return (
-    <section className="relative overflow-hidden bg-navy pt-[calc(var(--header-h)+2.5rem)] pb-14 md:pb-20">
+    <section className="grain relative overflow-hidden bg-navy pt-[calc(var(--header-h)+2.5rem)] pb-14 md:pb-20">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(234,90,30,0.22),transparent_55%)]" />
+      <div className="grid-lines pointer-events-none absolute inset-0" />
       <div className="site-container relative">
         {crumbs?.length ? (
           <nav className="mb-5 flex flex-wrap items-center gap-1.5 text-sm text-white/55">

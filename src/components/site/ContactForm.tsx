@@ -114,7 +114,7 @@ export function ContactForm({
         <input
           name="car"
           className={inputClass}
-          placeholder="VW Passat B7, 2012 / Skoda Octavia…"
+          placeholder="VW Passat 2012 / Kia Rio 2018 / Hyundai Tucson…"
         />
       </label>
 
