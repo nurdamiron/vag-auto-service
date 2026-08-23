@@ -9,6 +9,7 @@ import { SpotlightCard } from "@/components/motion/SpotlightCard";
 import { DiagAreas } from "@/components/site/DiagAreas";
 import { ContactForm } from "@/components/site/ContactForm";
 import { BrandCard } from "@/components/site/BrandCard";
+import { BrandLogo } from "@/components/site/BrandLogo";
 import {
   brands,
   business,
@@ -46,6 +47,14 @@ export default async function BrandPage({ params }: Props) {
   return (
     <>
       <PageHero
+        mark={
+          <BrandLogo
+            slug={brand.slug}
+            name={brand.name}
+            decorative
+            className="h-12 w-32 sm:h-14 sm:w-36"
+          />
+        }
         eyebrow={brand.group === "korea" ? "Корейские марки" : "Концерн VAG"}
         title={`Ремонт ${brand.name} в Алматы`}
         text={brand.intro}

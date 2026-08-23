@@ -5,9 +5,10 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { StaggerGrid, StaggerItem } from "@/components/motion/Stagger";
 import { BrandCard } from "@/components/site/BrandCard";
+import { BrandLogo } from "@/components/site/BrandLogo";
 import { DiagAreas } from "@/components/site/DiagAreas";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { brandGroups, brandsByGroup, sectionsCopy } from "@/lib/data";
+import { brandGroups, brands, brandsByGroup, sectionsCopy } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Марки",
@@ -19,6 +20,18 @@ export default function BrandsPage() {
   return (
     <>
       <PageHero
+        mark={
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+            {brands.map((b) => (
+              <BrandLogo
+                key={b.slug}
+                slug={b.slug}
+                name={b.name}
+                className="h-8 w-20 text-white/80"
+              />
+            ))}
+          </div>
+        }
         eyebrow="Марки"
         title="Немцы и корейцы — два профильных направления"
         text="Концерн VAG с самого начала, Kia и Hyundai — отдельным направлением. По каждой марке знаем типовые болячки и держим нужное оборудование."

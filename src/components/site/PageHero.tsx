@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
@@ -8,9 +9,10 @@ type Props = {
   title: string;
   text?: string;
   crumbs?: Crumb[];
+  mark?: ReactNode;
 };
 
-export function PageHero({ eyebrow, title, text, crumbs }: Props) {
+export function PageHero({ eyebrow, title, text, crumbs, mark }: Props) {
   return (
     <section className="grain relative overflow-hidden bg-navy pt-[calc(var(--header-h)+2.5rem)] pb-14 md:pb-20">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(234,90,30,0.22),transparent_55%)]" />
@@ -32,6 +34,7 @@ export function PageHero({ eyebrow, title, text, crumbs }: Props) {
             ))}
           </nav>
         ) : null}
+        {mark ? <div className="mb-5 text-white">{mark}</div> : null}
         {eyebrow ? <p className="eyebrow mb-3">{eyebrow}</p> : null}
         <h1 className="type-display max-w-3xl text-4xl text-white sm:text-5xl md:text-6xl">
           {title}

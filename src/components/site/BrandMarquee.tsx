@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/site/BrandLogo";
 import { brands } from "@/lib/data";
 
 /**
@@ -22,13 +23,21 @@ export function BrandMarquee({ tone = "dark" }: { tone?: "dark" | "light" }) {
             href={`/brands/${brand.slug}`}
             aria-hidden={i >= brands.length}
             tabIndex={i >= brands.length ? -1 : 0}
-            className={`type-display shrink-0 text-xl uppercase tracking-[0.18em] transition-colors sm:text-2xl ${
+            className={`flex shrink-0 items-center gap-3 transition-colors ${
               dark
-                ? "text-white/35 hover:text-orange"
-                : "text-navy/30 hover:text-orange"
+                ? "text-white/45 hover:text-orange"
+                : "text-navy/35 hover:text-orange"
             }`}
           >
-            {brand.name}
+            <BrandLogo
+              slug={brand.slug}
+              name={brand.name}
+              decorative
+              className="h-8 w-[4.75rem] sm:h-9 sm:w-24"
+            />
+            <span className="type-display text-lg uppercase tracking-[0.18em] sm:text-xl">
+              {brand.name}
+            </span>
           </Link>
         ))}
       </div>

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { StaggerGrid, StaggerItem } from "@/components/motion/Stagger";
+import { BrandLogo } from "@/components/site/BrandLogo";
 import { brands, business, whyUs, trustBadges, waLink } from "@/lib/data";
 import { BadgeCheck } from "lucide-react";
 
@@ -132,6 +133,12 @@ export default function AboutPage() {
             <div className="mt-6 flex flex-wrap gap-2">
               {brands.map((b) => (
                 <Link key={b.slug} href={`/brands/${b.slug}`} className="chip">
+                  <BrandLogo
+                    slug={b.slug}
+                    name={b.name}
+                    decorative
+                    className="h-4 w-8"
+                  />
                   {b.name}
                 </Link>
               ))}
