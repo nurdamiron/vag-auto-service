@@ -5,13 +5,24 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { StaggerGrid, StaggerItem } from "@/components/motion/Stagger";
 import { BrandLogo } from "@/components/site/BrandLogo";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { brands, business, whyUs, trustBadges, waLink } from "@/lib/data";
 import { BadgeCheck } from "lucide-react";
+import {
+  breadcrumbNode,
+  graph,
+  pageMetadata,
+  webPageNode,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
+const PATH = "/about";
+const CRUMBS = [{ name: "Главная", path: "/" }, { name: "О нас" }];
+
+export const metadata: Metadata = pageMetadata({
   title: "О нас",
-  description: `${business.name} — автосервис в Алматы, мкр. Таугуль. VW, Audi, Skoda, Porsche, Kia и Hyundai: диагностика, ремонт и малярка. Смета до работ, гарантия на выполненные работы.`,
-};
+  description: `${business.name} — автосервис в Алматы, мкр. Таугуль. VW, Audi, Skoda, Kia и Hyundai: диагностика, ремонт и малярка. Смета до работ.`,
+  path: PATH,
+});
 
 const aboutImage =
   "https://framerusercontent.com/images/JvlMrZBpxG3mmlVw12DVl8epGw.jpg";
@@ -21,6 +32,21 @@ const shopImage =
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        id="ld-about"
+        data={graph(
+          webPageNode({
+            path: PATH,
+            name: `О сервисе ${business.name}`,
+            description: business.description,
+            type: "AboutPage",
+            crumbs: CRUMBS,
+            image: aboutImage,
+          }),
+          breadcrumbNode(PATH, CRUMBS)
+        )}
+      />
+
       <PageHero
         eyebrow="О сервисе"
         title="Сервис, куда едут после того, как в другом месте «не нашли»"

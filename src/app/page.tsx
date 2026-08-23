@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   ArrowRight,
   BadgeCheck,
@@ -25,7 +26,17 @@ import { StatsStrip } from "@/components/site/StatsStrip";
 import { SymptomGrid } from "@/components/site/SymptomGrid";
 import { Objections } from "@/components/site/Objections";
 import { LocalContext } from "@/components/site/LocalContext";
+import { JsonLd } from "@/components/seo/JsonLd";
 import {
+  absoluteUrl,
+  ALTERNATE_TYPES,
+  graph,
+  itemListNode,
+  ORG_ID,
+  webPageNode,
+} from "@/lib/seo";
+import {
+  areas,
   blogPosts,
   brandGroups,
   brandsByGroup,
@@ -46,9 +57,44 @@ const heroImage = "/images/hero-auto-service.jpg";
 const aboutImage =
   "https://framerusercontent.com/images/g4JKIXKxUHdkYwtBbzHXNpFaPdg.jpg";
 
+export const metadata: Metadata = {
+  alternates: { canonical: "/", types: ALTERNATE_TYPES },
+};
+
+/** Отзывы с 2ГИС в разметке — источник рейтинга виден поисковику */
+const reviewNodes = reviews.map((r) => ({
+  "@type": "Review",
+  author: { "@type": "Person", name: r.name },
+  reviewBody: r.text,
+  publisher: { "@type": "Organization", name: "2ГИС" },
+  itemReviewed: { "@id": ORG_ID },
+  reviewRating: {
+    "@type": "Rating",
+    ratingValue: 5,
+    bestRating: 5,
+    worstRating: 1,
+  },
+}));
+
 export default function HomePage() {
   return (
     <>
+      <JsonLd
+        id="ld-home"
+        data={graph(
+          webPageNode({
+            path: "/",
+            name: heroCopy.title,
+            description: business.description,
+            image: absoluteUrl(heroImage),
+          }),
+          itemListNode(
+            "/services",
+            services.map((s) => ({ name: s.title, path: `/services/${s.slug}` }))
+          ),
+          ...reviewNodes
+        )}
+      />
       {/* ---------------------------------------------------------- */}
       {/*  Hero                                                       */}
       {/* ---------------------------------------------------------- */}
@@ -417,6 +463,18 @@ export default function HomePage() {
           <div className="mt-10">
             <LocalContext />
           </div>
+          <Reveal delay={0.08}>
+            <p className="mt-8 text-sm font-semibold text-navy">
+              Едете из района — откройте свою страницу:
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {areas.map((a) => (
+                <Link key={a.slug} href={`/areas/${a.slug}`} className="chip">
+                  {a.name}
+                </Link>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -575,6 +633,13 @@ export default function HomePage() {
                   WhatsApp
                 </a>
               </div>
+              <Link
+                href="/faq"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-orange"
+              >
+                Все вопросы и ответы
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </Reveal>
             <Reveal delay={0.05} from="right">
               <FaqAccordion />
@@ -612,10 +677,11 @@ export default function HomePage() {
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
                       src={post.image}
-                      alt={post.title}
+                      alt={post.coverAlt ?? post.title}
                       fill
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                       sizes="(min-width:768px) 33vw, 100vw"
+                      unoptimized={post.image.endsWith(".svg")}
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-5">

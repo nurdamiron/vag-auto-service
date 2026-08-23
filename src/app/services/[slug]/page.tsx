@@ -8,14 +8,27 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { DiagAreas } from "@/components/site/DiagAreas";
 import { BrandLogo } from "@/components/site/BrandLogo";
+import { JsonLd } from "@/components/seo/JsonLd";
 import {
   brands,
   business,
+  getCombo,
   getService,
   services,
   telLink,
   waLink,
 } from "@/lib/data";
+import { serviceQa } from "@/lib/answers";
+import {
+  breadcrumbNode,
+  composeDescription,
+  faqNode,
+  graph,
+  ogImageUrl,
+  pageMetadata,
+  serviceNode,
+  webPageNode,
+} from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -34,11 +47,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = getService(slug);
   if (!service) return { title: "Услуга" };
 
-  return {
+  return pageMetadata({
     title: `${service.title} в Алматы`,
-    description: `${service.short} ${business.name}, ${business.district}. Смета до начала работ, гарантия на выполненные работы.`,
-    alternates: { canonical: `/services/${service.slug}` },
-  };
+    description: composeDescription([
+      service.short,
+      `${business.name}, ${business.district}.`,
+      "Смета до начала работ.",
+      business.guaranteeShort + ".",
+    ]),
+    path: `/services/${service.slug}`,
+    image: ogImageUrl(`/services/${service.slug}`),
+    keywords: [
+      `${service.title} Алматы`,
+      `${service.title} цена Алматы`,
+      ...service.symptoms.map((s) => s.toLowerCase()),
+    ],
+  });
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
@@ -49,9 +73,32 @@ export default async function ServiceDetailPage({ params }: Props) {
   const others = services.filter((s) => s.slug !== slug).slice(0, 3);
   const paragraphs = service.description.split("\n\n");
   const PanelIcon = service.panel ? PANEL_ICONS[service.panel.icon] : null;
+  const path = `/services/${service.slug}`;
+  const qa = serviceQa(service);
+  const crumbs = [
+    { name: "Главная", path: "/" },
+    { name: "Услуги", path: "/services" },
+    { name: service.title },
+  ];
 
   return (
     <>
+      <JsonLd
+        id="ld-service"
+        data={graph(
+          webPageNode({
+            path,
+            name: `${service.title} в Алматы`,
+            description: service.short,
+            crumbs,
+            image: service.image ?? undefined,
+          }),
+          breadcrumbNode(path, crumbs),
+          serviceNode(service),
+          faqNode(path, qa)
+        )}
+      />
+
       <PageHero
         eyebrow="Услуга"
         title={service.title}
@@ -146,7 +193,15 @@ export default async function ServiceDetailPage({ params }: Props) {
               </h2>
               <div className="mt-4 flex flex-wrap gap-2">
                 {brands.map((b) => (
-                  <Link key={b.slug} href={`/brands/${b.slug}`} className="chip">
+                  <Link
+                    key={b.slug}
+                    href={
+                      getCombo(service.slug, b.slug)
+                        ? `/services/${service.slug}/${b.slug}`
+                        : `/brands/${b.slug}`
+                    }
+                    className="chip"
+                  >
                     <BrandLogo
                       slug={b.slug}
                       name={b.name}
@@ -229,6 +284,41 @@ export default async function ServiceDetailPage({ params }: Props) {
           </div>
         </section>
       ) : null}
+
+      {/* Вопросы по услуге: прямые ответы для поиска и ИИ-ассистентов */}
+      <section className="section-pad border-t border-border bg-bg">
+        <div className="site-container max-w-3xl">
+          <Reveal>
+            <p className="eyebrow">Коротко</p>
+            <h2 className="type-display mt-3 text-3xl text-navy sm:text-4xl">
+              {service.title}: частые вопросы
+            </h2>
+          </Reveal>
+          <div className="mt-8 space-y-4">
+            {qa.map((item) => (
+              <Reveal key={item.q}>
+                <article className="surface-card p-5 sm:p-6">
+                  <h3 className="type-display text-base text-navy sm:text-lg">
+                    {item.q}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate sm:text-base">
+                    {item.a}
+                  </p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <Link
+              href="/faq"
+              className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-orange"
+            >
+              Все вопросы о сервисе
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
 
       {others.length > 0 ? (
         <section className="section-pad border-t border-border">

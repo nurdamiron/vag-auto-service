@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1b2b"/>
+      <stop offset="1" stop-color="#16324c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g fill="#ea5a1e" opacity="0.18">
+      <circle cx="1157" cy="21" r="4"/><circle cx="134" cy="30" r="5"/><circle cx="231" cy="-225" r="6"/><circle cx="328" cy="-353" r="7"/><circle cx="425" cy="-157" r="8"/><circle cx="522" cy="-319" r="4"/><circle cx="619" cy="-140" r="5"/><circle cx="716" cy="21" r="6"/><circle cx="813" cy="30" r="7"/><circle cx="910" cy="-225" r="8"/><circle cx="1007" cy="-353" r="4"/><circle cx="1104" cy="-157" r="5"/><circle cx="81" cy="-319" r="6"/><circle cx="178" cy="-140" r="7"/><circle cx="275" cy="21" r="8"/><circle cx="372" cy="30" r="4"/><circle cx="469" cy="-225" r="5"/><circle cx="566" cy="-353" r="6"/>
+    </g>
+  <rect x="0" y="618" width="1200" height="12" fill="#ea5a1e"/>
+  <text x="72" y="88" fill="#ea5a1e" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4">ПЕРЕД ПОКУПКОЙ</text>
+  <text x="72" y="200" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700"><tspan x="72" dy="0">Проверка Kia Sportage</tspan><tspan x="72" dy="62.099999999999994">перед покупкой</tspan></text>
+  <rect x="72" y="500" width="1056" height="2" fill="rgba(255,255,255,0.18)"/>
+  <text x="72" y="548" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">VAG Auto Service</text>
+  <text x="72" y="586" fill="rgba(255,255,255,0.7)" font-family="Arial, Helvetica, sans-serif" font-size="20">Таугуль, Алматы · +7 707 405 69 07</text>
+</svg>

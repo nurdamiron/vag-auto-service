@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1b2b"/>
+      <stop offset="1" stop-color="#16324c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g fill="#ea5a1e" opacity="0.18">
+      <circle cx="742" cy="502" r="4"/><circle cx="839" cy="271" r="5"/><circle cx="936" cy="415" r="6"/><circle cx="1033" cy="487" r="7"/><circle cx="1130" cy="523" r="8"/><circle cx="107" cy="281" r="4"/><circle cx="204" cy="160" r="5"/><circle cx="301" cy="502" r="6"/><circle cx="398" cy="271" r="7"/><circle cx="495" cy="415" r="8"/><circle cx="592" cy="487" r="4"/><circle cx="689" cy="523" r="5"/><circle cx="786" cy="281" r="6"/><circle cx="883" cy="160" r="7"/><circle cx="980" cy="502" r="8"/><circle cx="1077" cy="271" r="4"/><circle cx="54" cy="415" r="5"/><circle cx="151" cy="487" r="6"/>
+    </g>
+  <rect x="0" y="618" width="1200" height="12" fill="#ea5a1e"/>
+  <text x="72" y="88" fill="#ea5a1e" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4">МАЛЯРКА</text>
+  <text x="72" y="200" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700"><tspan x="72" dy="0">Полировка царапин: когда</tspan><tspan x="72" dy="62.099999999999994">хватит, когда уже грунт</tspan></text>
+  <rect x="72" y="500" width="1056" height="2" fill="rgba(255,255,255,0.18)"/>
+  <text x="72" y="548" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">VAG Auto Service</text>
+  <text x="72" y="586" fill="rgba(255,255,255,0.7)" font-family="Arial, Helvetica, sans-serif" font-size="20">Таугуль, Алматы · +7 707 405 69 07</text>
+</svg>

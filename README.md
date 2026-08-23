@@ -43,11 +43,35 @@ npm run dev
 
 ```
 src/
-  app/                 # страницы: /, /services, /about, /blog, /contact
+  app/                 # страницы: /, /services, /brands, /faq, /about, /blog, /contact
   components/site/     # Header, Footer, forms, FAQ…
   components/motion/   # Reveal, Stagger
+  components/seo/      # вставка Schema.org
   lib/data.ts          # контент и контакты
+  lib/seo.ts           # метаданные и Schema.org
+  lib/markdown.ts      # llms.txt и Markdown-зеркала страниц
+  proxy.ts             # переписывает /page.md на Markdown-маршрут
 ```
+
+## SEO и ИИ-поиск
+
+Сайт отдаёт машиночитаемые версии контента:
+
+| Адрес | Что это |
+|-------|---------|
+| `/sitemap.xml` | карта сайта |
+| `/robots.txt` | правила обхода, включая краулеры ChatGPT, Claude, Perplexity |
+| `/llms.txt` | карта сайта для языковых моделей |
+| `/llms-full.txt` | весь контент одним файлом |
+| `/feed.xml` | RSS статей |
+| `/services/brakes.md` | Markdown-версия любой страницы |
+
+Подробности и список задач после деплоя — в [docs/SEO.md](docs/SEO.md).
+
+## Переменные окружения
+
+Скопируйте `.env.example` в `.env.local`. Ключевая — `NEXT_PUBLIC_SITE_URL`:
+без неё canonical и sitemap указывают на адрес `.vercel.app`.
 
 ## Скрипты
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1b2b"/>
+      <stop offset="1" stop-color="#16324c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g fill="#ea5a1e" opacity="0.18">
+      <circle cx="1117" cy="77" r="4"/><circle cx="94" cy="58" r="5"/><circle cx="191" cy="309" r="6"/><circle cx="288" cy="174" r="7"/><circle cx="385" cy="107" r="8"/><circle cx="482" cy="333" r="4"/><circle cx="579" cy="446" r="5"/><circle cx="676" cy="77" r="6"/><circle cx="773" cy="58" r="7"/><circle cx="870" cy="309" r="8"/><circle cx="967" cy="174" r="4"/><circle cx="1064" cy="107" r="5"/><circle cx="41" cy="333" r="6"/><circle cx="138" cy="446" r="7"/><circle cx="235" cy="77" r="8"/><circle cx="332" cy="58" r="4"/><circle cx="429" cy="309" r="5"/><circle cx="526" cy="174" r="6"/>
+    </g>
+  <rect x="0" y="618" width="1200" height="12" fill="#ea5a1e"/>
+  <text x="72" y="88" fill="#ea5a1e" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4">ОХЛАЖДЕНИЕ</text>
+  <text x="72" y="200" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700"><tspan x="72" dy="0">Антифриз G12/G13 на VAG:</tspan><tspan x="72" dy="55.199999999999996">нельзя мешать и доливать</tspan><tspan x="72" dy="55.199999999999996">«зелёный»</tspan></text>
+  <rect x="72" y="500" width="1056" height="2" fill="rgba(255,255,255,0.18)"/>
+  <text x="72" y="548" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">VAG Auto Service</text>
+  <text x="72" y="586" fill="rgba(255,255,255,0.7)" font-family="Arial, Helvetica, sans-serif" font-size="20">Таугуль, Алматы · +7 707 405 69 07</text>
+</svg>

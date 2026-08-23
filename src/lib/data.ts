@@ -9,3 +9,5 @@ export * from "./services";
 export * from "./brands";
 export * from "./blog";
 export * from "./copy";
+export * from "./areas";
+export * from "./combos";
