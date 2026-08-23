@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { BrandLogo } from "@/components/site/BrandLogo";
-import { brands, business, nav, services, telLink, waLink } from "@/lib/data";
+import { areas, brands, business, nav, services, telLink, waLink } from "@/lib/data";
 
 export function Footer() {
   return (
@@ -138,6 +138,23 @@ export function Footer() {
                   className="h-4 w-8"
                 />
                 {b.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 border-t border-white/10 pt-6">
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50">
+            Районы Алматы
+          </h3>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {areas.map((a) => (
+              <Link
+                key={a.slug}
+                href={`/areas/${a.slug}`}
+                className="rounded-full border border-white/12 bg-white/5 px-3 py-1.5 text-sm text-white/75 transition-colors hover:border-orange/50 hover:text-orange"
+              >
+                {a.name}
               </Link>
             ))}
           </div>

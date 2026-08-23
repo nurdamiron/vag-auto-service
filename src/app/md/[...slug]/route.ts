@@ -1,15 +1,21 @@
 import { notFound } from "next/navigation";
 import {
+  areas,
   blogPosts,
   brands,
+  combos,
+  getArea,
   getBrand,
+  getCombo,
   getPost,
   getService,
   services,
 } from "@/lib/data";
 import {
+  areaMarkdown,
   brandMarkdown,
   businessMarkdown,
+  comboMarkdown,
   diagnosticsMarkdown,
   faqMarkdown,
   postMarkdown,
@@ -53,6 +59,11 @@ function render(slug: string[]): string | null {
         services.map((s) => ({ name: s.title, path: `/services/${s.slug}` }))
       );
     }
+    const brandSlug = slug[2];
+    if (brandSlug) {
+      const combo = getCombo(item, brandSlug);
+      return combo ? comboMarkdown(combo) : null;
+    }
     const service = getService(item);
     return service ? serviceMarkdown(service) : null;
   }
@@ -66,6 +77,17 @@ function render(slug: string[]): string | null {
     }
     const brand = getBrand(item);
     return brand ? brandMarkdown(brand) : null;
+  }
+
+  if (section === "areas") {
+    if (!item) {
+      return list(
+        "Районы Алматы",
+        areas.map((a) => ({ name: `Автосервис ${a.name}`, path: `/areas/${a.slug}` }))
+      );
+    }
+    const area = getArea(item);
+    return area ? areaMarkdown(area) : null;
   }
 
   if (section === "blog") {
@@ -90,8 +112,11 @@ export function generateStaticParams() {
     { slug: ["services"] },
     { slug: ["brands"] },
     { slug: ["blog"] },
+    { slug: ["areas"] },
     ...services.map((s) => ({ slug: ["services", s.slug] })),
+    ...combos.map((c) => ({ slug: ["services", c.service, c.brand] })),
     ...brands.map((b) => ({ slug: ["brands", b.slug] })),
+    ...areas.map((a) => ({ slug: ["areas", a.slug] })),
     ...blogPosts.map((p) => ({ slug: ["blog", p.slug] })),
   ];
 }

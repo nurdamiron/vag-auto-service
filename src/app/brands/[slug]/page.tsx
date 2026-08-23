@@ -15,6 +15,7 @@ import {
   brands,
   business,
   getBrand,
+  getCombo,
   services,
   telLink,
   waLink,
@@ -227,7 +228,11 @@ export default async function BrandPage({ params }: Props) {
             {services.map((s) => (
               <StaggerItem key={s.slug}>
                 <Link
-                  href={`/services/${s.slug}`}
+                  href={
+                    getCombo(s.slug, brand.slug)
+                      ? `/services/${s.slug}/${brand.slug}`
+                      : `/services/${s.slug}`
+                  }
                   className="surface-card surface-card-hover group flex h-full items-center justify-between gap-3 p-5"
                 >
                   <span className="type-display text-base text-navy transition-colors group-hover:text-orange sm:text-lg">

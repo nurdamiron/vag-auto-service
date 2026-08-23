@@ -12,6 +12,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import {
   brands,
   business,
+  getCombo,
   getService,
   services,
   telLink,
@@ -192,7 +193,15 @@ export default async function ServiceDetailPage({ params }: Props) {
               </h2>
               <div className="mt-4 flex flex-wrap gap-2">
                 {brands.map((b) => (
-                  <Link key={b.slug} href={`/brands/${b.slug}`} className="chip">
+                  <Link
+                    key={b.slug}
+                    href={
+                      getCombo(service.slug, b.slug)
+                        ? `/services/${service.slug}/${b.slug}`
+                        : `/brands/${b.slug}`
+                    }
+                    className="chip"
+                  >
                     <BrandLogo
                       slug={b.slug}
                       name={b.name}

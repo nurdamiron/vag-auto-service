@@ -9,7 +9,9 @@
 import { business } from "./business";
 import { brands, type Brand } from "./brands";
 import { services, diagAreas, type Service } from "./services";
+import { areas, type Area } from "./areas";
 import { blogPosts, type BlogPost } from "./blog";
+import { combos, type ServiceBrandCombo } from "./combos";
 import { faq } from "./copy";
 import { brandQa, serviceQa } from "./answers";
 import { absoluteUrl } from "./seo";
@@ -143,6 +145,42 @@ export function faqMarkdown(): string {
   return ["## Частые вопросы", "", qaBlock(faq)].join("\n");
 }
 
+export function areaMarkdown(area: Area): string {
+  return [
+    `# Автосервис ${area.name}, Алматы`,
+    "",
+    `URL: ${absoluteUrl(`/areas/${area.slug}`)}`,
+    "",
+    `> ${area.excerpt}`,
+    "",
+    `**Как ехать:** ${area.drive}`,
+    `**Что приезжает:** ${area.typical}`,
+    `**Дороги:** ${area.roads}`,
+    "",
+    area.paragraphs.join("\n\n"),
+    "",
+    "## Вопросы и ответы",
+    "",
+    qaBlock(area.faqs),
+  ].join("\n");
+}
+
+export function comboMarkdown(combo: ServiceBrandCombo): string {
+  return [
+    `# ${combo.title}`,
+    "",
+    `URL: ${absoluteUrl(`/services/${combo.service}/${combo.brand}`)}`,
+    "",
+    `> ${combo.excerpt}`,
+    "",
+    combo.paragraphs.join("\n\n"),
+    "",
+    "## Вопросы и ответы",
+    "",
+    qaBlock(combo.faqs),
+  ].join("\n");
+}
+
 /* ------------------------------------------------------------------ */
 /*  Файлы для LLM                                                      */
 /* ------------------------------------------------------------------ */
@@ -166,6 +204,14 @@ export function llmsTxt(): string {
     "",
     brands.map((b) => link(`Ремонт ${b.name}`, `/brands/${b.slug}`, b.short)).join("\n"),
     "",
+    "## Районы Алматы",
+    "",
+    areas.map((a) => link(`Автосервис ${a.name}`, `/areas/${a.slug}`, a.short)).join("\n"),
+    "",
+    "## Услуга и марка",
+    "",
+    combos.map((c) => link(c.title, `/services/${c.service}/${c.brand}`, c.excerpt)).join("\n"),
+    "",
     "## Статьи",
     "",
     blogPosts.map((p) => link(p.title, `/blog/${p.slug}`, p.excerpt)).join("\n"),
@@ -176,6 +222,7 @@ export function llmsTxt(): string {
       link("Главная", "/", "обзор сервиса, симптомы, отзывы"),
       link("Все услуги", "/services", "каталог из двенадцати направлений"),
       link("Все марки", "/brands", "концерн VAG и корейские марки"),
+      link("Районы Алматы", "/areas", "Таугуль, Аксай, Орбита, Бостандык, Медеу"),
       link("Вопросы и ответы", "/faq", "цены, гарантия, запись, оплата"),
       link("О сервисе", "/about", "как работаем и чем отличаемся"),
       link("Контакты и запись", "/contact", "адрес, телефон, форма заявки"),
@@ -200,6 +247,10 @@ export function llmsFullTxt(): string {
     services.map(serviceMarkdown).join(rule),
     "# Марки",
     brands.map(brandMarkdown).join(rule),
+    "# Районы Алматы",
+    areas.map(areaMarkdown).join(rule),
+    "# Услуга и марка",
+    combos.map(comboMarkdown).join(rule),
     "# Статьи",
     blogPosts.map(postMarkdown).join(rule),
   ].join(rule);

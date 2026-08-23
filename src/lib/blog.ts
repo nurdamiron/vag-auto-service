@@ -65,6 +65,24 @@ export function relatedPosts(post: BlogPost, n = 3): BlogPost[] {
   return scored.slice(0, n).map((x) => x.p);
 }
 
+export function postsMatching(
+  opts: { service?: string; brand?: string },
+  n = 3
+): BlogPost[] {
+  return blogPosts
+    .filter((p) => {
+      if (opts.service && opts.brand) {
+        return (
+          p.relatedService === opts.service || p.relatedBrand === opts.brand
+        );
+      }
+      if (opts.service) return p.relatedService === opts.service;
+      if (opts.brand) return p.relatedBrand === opts.brand;
+      return false;
+    })
+    .slice(0, n);
+}
+
 export function blogCategories(): { name: string; count: number }[] {
   const counts = new Map<string, number>();
   for (const post of blogPosts) {

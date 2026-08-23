@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { blogPosts, brands, services } from "@/lib/data";
+import { areas, blogPosts, brands, combos, services } from "@/lib/data";
 import { absoluteUrl } from "@/lib/seo";
 
 /** Дата сборки: единая отметка для страниц без собственной даты */
@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { url: absoluteUrl("/faq"), changeFrequency: "monthly", priority: 0.7 },
       { url: absoluteUrl("/about"), changeFrequency: "yearly", priority: 0.6 },
       { url: absoluteUrl("/blog"), changeFrequency: "weekly", priority: 0.6 },
+      { url: absoluteUrl("/areas"), changeFrequency: "monthly", priority: 0.7 },
     ] satisfies MetadataRoute.Sitemap
   ).map((page) => ({ ...page, lastModified: BUILD_DATE }));
 
@@ -33,6 +34,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const areaPages: MetadataRoute.Sitemap = areas.map((a) => ({
+    url: absoluteUrl(`/areas/${a.slug}`),
+    lastModified: BUILD_DATE,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  const comboPages: MetadataRoute.Sitemap = combos.map((c) => ({
+    url: absoluteUrl(`/services/${c.service}/${c.brand}`),
+    lastModified: BUILD_DATE,
+    changeFrequency: "monthly",
+    priority: 0.75,
+  }));
+
   const postPages: MetadataRoute.Sitemap = blogPosts.map((p) => ({
     url: absoluteUrl(`/blog/${p.slug}`),
     lastModified: new Date(p.dateIso),
@@ -41,5 +56,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: [p.image.startsWith("http") ? p.image : absoluteUrl(p.image)],
   }));
 
-  return [...staticPages, ...servicePages, ...brandPages, ...postPages];
+  return [
+    ...staticPages,
+    ...servicePages,
+    ...brandPages,
+    ...areaPages,
+    ...comboPages,
+    ...postPages,
+  ];
 }

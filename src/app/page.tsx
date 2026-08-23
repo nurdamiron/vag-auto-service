@@ -36,6 +36,7 @@ import {
   webPageNode,
 } from "@/lib/seo";
 import {
+  areas,
   blogPosts,
   brandGroups,
   brandsByGroup,
@@ -462,6 +463,18 @@ export default function HomePage() {
           <div className="mt-10">
             <LocalContext />
           </div>
+          <Reveal delay={0.08}>
+            <p className="mt-8 text-sm font-semibold text-navy">
+              Едете из района — откройте свою страницу:
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {areas.map((a) => (
+                <Link key={a.slug} href={`/areas/${a.slug}`} className="chip">
+                  {a.name}
+                </Link>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
