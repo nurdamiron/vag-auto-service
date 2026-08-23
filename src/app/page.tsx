@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   ArrowRight,
   BadgeCheck,
@@ -25,6 +26,15 @@ import { StatsStrip } from "@/components/site/StatsStrip";
 import { SymptomGrid } from "@/components/site/SymptomGrid";
 import { Objections } from "@/components/site/Objections";
 import { LocalContext } from "@/components/site/LocalContext";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  absoluteUrl,
+  ALTERNATE_TYPES,
+  graph,
+  itemListNode,
+  ORG_ID,
+  webPageNode,
+} from "@/lib/seo";
 import {
   blogPosts,
   brandGroups,
@@ -46,9 +56,44 @@ const heroImage = "/images/hero-auto-service.jpg";
 const aboutImage =
   "https://framerusercontent.com/images/g4JKIXKxUHdkYwtBbzHXNpFaPdg.jpg";
 
+export const metadata: Metadata = {
+  alternates: { canonical: "/", types: ALTERNATE_TYPES },
+};
+
+/** Отзывы с 2ГИС в разметке — источник рейтинга виден поисковику */
+const reviewNodes = reviews.map((r) => ({
+  "@type": "Review",
+  author: { "@type": "Person", name: r.name },
+  reviewBody: r.text,
+  publisher: { "@type": "Organization", name: "2ГИС" },
+  itemReviewed: { "@id": ORG_ID },
+  reviewRating: {
+    "@type": "Rating",
+    ratingValue: 5,
+    bestRating: 5,
+    worstRating: 1,
+  },
+}));
+
 export default function HomePage() {
   return (
     <>
+      <JsonLd
+        id="ld-home"
+        data={graph(
+          webPageNode({
+            path: "/",
+            name: heroCopy.title,
+            description: business.description,
+            image: absoluteUrl(heroImage),
+          }),
+          itemListNode(
+            "/services",
+            services.map((s) => ({ name: s.title, path: `/services/${s.slug}` }))
+          ),
+          ...reviewNodes
+        )}
+      />
       {/* ---------------------------------------------------------- */}
       {/*  Hero                                                       */}
       {/* ---------------------------------------------------------- */}
@@ -575,6 +620,13 @@ export default function HomePage() {
                   WhatsApp
                 </a>
               </div>
+              <Link
+                href="/faq"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-orange"
+              >
+                Все вопросы и ответы
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </Reveal>
             <Reveal delay={0.05} from="right">
               <FaqAccordion />

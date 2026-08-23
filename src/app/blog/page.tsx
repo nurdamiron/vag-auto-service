@@ -4,17 +4,62 @@ import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { StaggerGrid, StaggerItem } from "@/components/motion/Stagger";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { blogPosts } from "@/lib/data";
+import {
+  absoluteUrl,
+  breadcrumbNode,
+  graph,
+  itemListNode,
+  ORG_ID,
+  pageMetadata,
+  webPageNode,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
+const PATH = "/blog";
+const CRUMBS = [{ name: "Главная", path: "/" }, { name: "Советы" }];
+
+export const metadata: Metadata = pageMetadata({
   title: "Советы",
   description:
     "Диагностика VAG, ABS на Passat/Golf, сцепление и КПП — полезно до визита на СТО в Алматы.",
-};
+  path: PATH,
+});
 
 export default function BlogPage() {
   return (
     <>
+      <JsonLd
+        id="ld-blog"
+        data={graph(
+          webPageNode({
+            path: PATH,
+            name: "Советы автосервиса",
+            description:
+              "Разборы типовых неисправностей и советы, как не переплатить на СТО.",
+            type: "CollectionPage",
+            crumbs: CRUMBS,
+          }),
+          breadcrumbNode(PATH, CRUMBS),
+          {
+            "@type": "Blog",
+            "@id": `${absoluteUrl(PATH)}#blog`,
+            name: "Советы VAG Auto Service",
+            url: absoluteUrl(PATH),
+            publisher: { "@id": ORG_ID },
+            blogPost: blogPosts.map((p) => ({
+              "@type": "BlogPosting",
+              headline: p.title,
+              url: absoluteUrl(`/blog/${p.slug}`),
+              datePublished: p.dateIso,
+            })),
+          },
+          itemListNode(
+            PATH,
+            blogPosts.map((p) => ({ name: p.title, path: `/blog/${p.slug}` }))
+          )
+        )}
+      />
       <PageHero
         eyebrow="Советы"
         title="Чтобы не переплатить на СТО"

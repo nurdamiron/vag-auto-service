@@ -8,17 +8,51 @@ import { BrandCard } from "@/components/site/BrandCard";
 import { BrandLogo } from "@/components/site/BrandLogo";
 import { DiagAreas } from "@/components/site/DiagAreas";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { brandGroups, brands, brandsByGroup, sectionsCopy } from "@/lib/data";
+import {
+  breadcrumbNode,
+  graph,
+  itemListNode,
+  pageMetadata,
+  webPageNode,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
+const PATH = "/brands";
+const CRUMBS = [{ name: "Главная", path: "/" }, { name: "Марки" }];
+
+export const metadata: Metadata = pageMetadata({
   title: "Марки",
   description:
     "Volkswagen, Audi, Skoda, Porsche, Bentley, Kia и Hyundai — диагностика, ремонт и малярные работы в VAG Auto Service, Алматы.",
-};
+  path: PATH,
+  keywords: brands.map((b) => `ремонт ${b.name} Алматы`),
+});
 
 export default function BrandsPage() {
   return (
     <>
+      <JsonLd
+        id="ld-brands"
+        data={graph(
+          webPageNode({
+            path: PATH,
+            name: "Марки, с которыми работаем",
+            description:
+              "Концерн VAG и корейские марки: диагностика, ремонт и малярные работы в Алматы.",
+            type: "CollectionPage",
+            crumbs: CRUMBS,
+          }),
+          breadcrumbNode(PATH, CRUMBS),
+          itemListNode(
+            PATH,
+            brands.map((b) => ({
+              name: `Ремонт ${b.name}`,
+              path: `/brands/${b.slug}`,
+            }))
+          )
+        )}
+      />
       <PageHero
         mark={
           <div className="flex flex-wrap items-center gap-x-6 gap-y-4">

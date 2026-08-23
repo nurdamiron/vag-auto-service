@@ -8,17 +8,50 @@ import { ServiceCard } from "@/components/site/ServiceCard";
 import { DiagAreas } from "@/components/site/DiagAreas";
 import { SymptomGrid } from "@/components/site/SymptomGrid";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { sectionsCopy, services } from "@/lib/data";
+import {
+  breadcrumbNode,
+  graph,
+  itemListNode,
+  pageMetadata,
+  serviceNode,
+  webPageNode,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
+const PATH = "/services";
+const CRUMBS = [{ name: "Главная", path: "/" }, { name: "Услуги" }];
+
+export const metadata: Metadata = pageMetadata({
   title: "Услуги",
   description:
-    "Диагностика по мотору, ходовке, коробке и малярке, ремонт двигателя и КПП, электрика, малярные работы, ТО и проверка авто перед покупкой — VAG Auto Service, Алматы, Таугуль.",
-};
+    "Диагностика, ремонт двигателя и КПП, ходовая, электрика, малярка, ТО и проверка перед покупкой. VAG Auto Service, Алматы, Таугуль.",
+  path: PATH,
+  keywords: services.map((s) => `${s.title} Алматы`),
+});
 
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        id="ld-services"
+        data={graph(
+          webPageNode({
+            path: PATH,
+            name: "Услуги автосервиса в Алматы",
+            description:
+              "Двенадцать направлений работ: диагностика, двигатель, ходовая, коробка, электрика, малярка, ТО и проверка перед покупкой.",
+            type: "CollectionPage",
+            crumbs: CRUMBS,
+          }),
+          breadcrumbNode(PATH, CRUMBS),
+          itemListNode(
+            PATH,
+            services.map((s) => ({ name: s.title, path: `/services/${s.slug}` }))
+          ),
+          ...services.map(serviceNode)
+        )}
+      />
       <PageHero
         eyebrow="Услуги"
         title="Двенадцать направлений — и одно правило: сначала диагноз"
@@ -28,6 +61,9 @@ export default function ServicesPage() {
 
       <section className="section-pad bg-bg">
         <div className="site-container">
+          {/* Заголовок скрыт визуально — в героблоке он уже есть.
+              Нужен, чтобы карточки с h3 не висели без уровня выше */}
+          <h2 className="sr-only">Направления работ</h2>
           <StaggerGrid className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s, i) => (
               <StaggerItem key={s.slug}>

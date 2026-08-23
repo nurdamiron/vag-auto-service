@@ -14,3 +14,12 @@ export const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 /** Яндекс.Метрика: номер счётчика */
 export const YM_ID = process.env.NEXT_PUBLIC_YM_ID ?? "";
+
+/**
+ * Коды подтверждения прав в панелях вебмастера.
+ * Пока пустые — meta-теги просто не выводятся.
+ */
+export const VERIFICATION = {
+  google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "",
+  yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION ?? "",
+} as const;

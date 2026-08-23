@@ -3,6 +3,8 @@
 export type BlogPost = {
   slug: string;
   title: string;
+  /** Укороченный заголовок для выдачи, если основной длинный */
+  seoTitle?: string;
   excerpt: string;
   category: string;
   date: string;
@@ -15,6 +17,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "proverka-avto-pered-pokupkoy",
     title: "Проверка авто перед покупкой в Алматы: что смотреть и в каком порядке",
+    seoTitle: "Проверка авто перед покупкой в Алматы: что смотреть",
     excerpt:
       "Толщиномер, блоки и подъёмник за один заезд — и вы уже знаете, брать машину или бежать.",
     category: "Перед покупкой",
@@ -50,6 +53,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "malyarnye-raboty-podbor-cveta",
     title: "Малярка: когда красить элемент, а когда хватит локального ремонта",
+    seoTitle: "Малярка: красить элемент или хватит локального ремонта",
     excerpt:
       "Толщиномер, подбор цвета по VIN и честная смета вместо «перекрасим полмашины».",
     category: "Малярка",
@@ -97,6 +101,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "sceplenie-i-korobka",
     title: "Сцепление и коробка: когда пора в сервис, а не «ещё чуть-чуть»",
+    seoTitle: "Сцепление и коробка: когда пора в сервис",
     excerpt:
       "Пробуксовка, удары, тугая педаль — признаки, из-за которых смета растёт каждую неделю.",
     category: "КПП",

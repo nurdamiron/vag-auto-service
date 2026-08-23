@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo, Inter } from "next/font/google";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -6,8 +6,9 @@ import { StickyCta } from "@/components/site/StickyCta";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { Analytics } from "@/components/analytics/Analytics";
 import { ConversionTracking } from "@/components/analytics/ConversionTracking";
-import { brands, business, services } from "@/lib/data";
-import { SITE_URL } from "@/lib/site";
+import { business } from "@/lib/data";
+import { SITE_URL, VERIFICATION } from "@/lib/site";
+import { ALTERNATE_TYPES, LOCALE } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -26,10 +27,15 @@ const archivo = Archivo({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `Автосервис в Алматы — ремонт VW, Audi, Skoda, Kia, Hyundai · ${business.name}`,
+    default: `${business.name} — автосервис в Алматы: VW, Audi, Skoda, Kia`,
     template: `%s · ${business.name}`,
   },
-  description: business.description,
+  description: business.metaDescription,
+  applicationName: business.name,
+  authors: [{ name: business.name, url: SITE_URL }],
+  creator: business.name,
+  publisher: business.name,
+  category: "automotive",
   keywords: [
     "автосервис Алматы",
     "компьютерная диагностика авто Алматы",
@@ -45,69 +51,59 @@ export const metadata: Metadata = {
     "проверка авто перед покупкой Алматы",
     "СТО Таугуль",
   ],
+  /**
+   * max-image-preview и max-snippet снимают ограничения на длину
+   * сниппета и размер картинки — без них поисковики и ИИ-ответы
+   * показывают урезанную выдержку.
+   */
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: `${business.name} — СТО в Алматы: VAG, Kia, Hyundai`,
     description: business.description,
     url: SITE_URL,
     siteName: business.name,
-    locale: "ru_KZ",
+    locale: LOCALE,
     type: "website",
   },
-  alternates: { canonical: "/" },
+  twitter: {
+    card: "summary_large_image",
+    title: `${business.name} — СТО в Алматы: VAG, Kia, Hyundai`,
+    description: business.description,
+  },
+  /**
+   * canonical здесь намеренно не задаём: он наследуется дочерними
+   * страницами, и любая страница без своего значения указывала бы
+   * на главную. Каждая страница объявляет canonical сама.
+   */
+  alternates: { types: ALTERNATE_TYPES },
+  verification: {
+    ...(VERIFICATION.google ? { google: VERIFICATION.google } : {}),
+    ...(VERIFICATION.yandex ? { yandex: VERIFICATION.yandex } : {}),
+  },
+  formatDetection: { telephone: true, address: true },
+  appleWebApp: { capable: true, title: business.shortName },
+  manifest: "/manifest.webmanifest",
+  other: {
+    "geo.region": "KZ-ALA",
+    "geo.placename": business.city,
+    "geo.position": `${business.lat};${business.lon}`,
+    ICBM: `${business.lat}, ${business.lon}`,
+  },
 };
 
-/** Schema.org: карточка сервиса + каталог услуг и марок */
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "AutoRepair",
-  name: business.name,
-  description: business.description,
-  url: SITE_URL,
-  telephone: business.phone,
-  email: business.email,
-  priceRange: "$$",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: business.address,
-    addressLocality: business.city,
-    postalCode: business.postal,
-    addressCountry: "KZ",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: business.lat,
-    longitude: business.lon,
-  },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
-    opens: "10:00",
-    closes: "20:00",
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: business.rating,
-    reviewCount: business.reviewCount,
-  },
-  brand: brands.map((b) => ({ "@type": "Brand", name: b.name })),
-  makesOffer: services.map((s) => ({
-    "@type": "Offer",
-    itemOffered: {
-      "@type": "Service",
-      name: s.title,
-      description: s.short,
-      url: `${SITE_URL}/services/${s.slug}`,
-    },
-  })),
-  sameAs: [business.mapUrl],
+export const viewport: Viewport = {
+  themeColor: "#0b1b2b",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -115,16 +111,22 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ru" className={`${inter.variable} ${archivo.variable} h-full`}>
+      <head>
+        {/* Домены сторонних картинок — соединение поднимается заранее */}
+        <link rel="preconnect" href="https://framerusercontent.com" />
+        <link rel="dns-prefetch" href="https://framerusercontent.com" />
+      </head>
       <body className="flex min-h-full flex-col font-sans antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <Analytics />
         <ConversionTracking />
         <ScrollProgress />
+        <a href="#main" className="skip-link">
+          Перейти к содержимому
+        </a>
         <Header />
-        <main className="relative flex-1 pb-20 md:pb-0">{children}</main>
+        <main id="main" className="relative flex-1 pb-20 md:pb-0">
+          {children}
+        </main>
         <Footer />
         <StickyCta />
       </body>

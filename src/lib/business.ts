@@ -7,6 +7,12 @@ export const business = {
   tagline: "Компьютерная диагностика авто. Высокая точность выявления проблем",
   description:
     "Автосервис в Алматы: компьютерная диагностика, ремонт двигателя, ходовой, коробки, электрика и малярные работы. Volkswagen, Audi, Skoda, Porsche, Bentley, Kia и Hyundai. Смета до начала работ, гарантия на выполненные работы.",
+  /**
+   * Короткая версия для meta description: полное описание не влезает
+   * в сниппет поиска и обрезается на середине фразы.
+   */
+  metaDescription:
+    "Автосервис в Алматы: диагностика, ремонт двигателя, ходовой, коробки, электрика и малярка. VW, Audi, Skoda, Kia, Hyundai. Смета до начала работ.",
   phone: "+77074056907",
   phoneDisplay: "+7 707 405 69 07",
   email: "baigozy@mail.ru",
@@ -38,6 +44,7 @@ export const nav = [
   { href: "/brands", label: "Марки" },
   { href: "/about", label: "О нас" },
   { href: "/blog", label: "Советы" },
+  { href: "/faq", label: "Вопросы" },
   { href: "/contact", label: "Запись" },
 ] as const;
 

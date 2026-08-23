@@ -49,6 +49,9 @@ export function Analytics() {
           </Script>
           <noscript>
             <div>
+              {/* Счётчик-пиксель Яндекса: next/image здесь неприменим —
+                  нужен обычный запрос к mc.yandex.ru без оптимизации */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`https://mc.yandex.ru/watch/${YM_ID}`}
                 style={{ position: "absolute", left: "-9999px" }}

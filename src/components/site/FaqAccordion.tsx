@@ -9,21 +9,8 @@ export function FaqAccordion() {
 
   return (
     <>
-      {/* Разметка FAQPage для поиска */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faq.map((item) => ({
-              "@type": "Question",
-              name: item.q,
-              acceptedAnswer: { "@type": "Answer", text: item.a },
-            })),
-          }),
-        }}
-      />
+      {/* Разметка FAQPage живёт на /faq — здесь только визуальный блок,
+          иначе один и тот же FAQPage дублируется на двух адресах */}
       <div className="divide-y divide-border rounded-2xl border border-border bg-white">
         {faq.map((item, i) => {
           const isOpen = open === i;

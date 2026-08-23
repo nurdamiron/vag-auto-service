@@ -3,16 +3,45 @@ import { Clock, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { ContactForm } from "@/components/site/ContactForm";
 import { Reveal } from "@/components/motion/Reveal";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { business, telLink, waLink } from "@/lib/data";
+import {
+  breadcrumbNode,
+  graph,
+  pageMetadata,
+  webPageNode,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
+const PATH = "/contact";
+const CRUMBS = [{ name: "Главная", path: "/" }, { name: "Контакты" }];
+
+export const metadata: Metadata = pageMetadata({
   title: "Контакты",
-  description: `Адрес, телефон и запись в ${business.name}: ${business.fullAddress}, ${business.phoneDisplay}.`,
-};
+  description: `Адрес, телефон и запись в ${business.name}: ${business.fullAddress}. ${business.phoneDisplay}, ${business.hours.toLowerCase()}.`,
+  path: PATH,
+  keywords: [
+    "автосервис Таугуль адрес",
+    "СТО Алматы Цветочная",
+    "записаться на диагностику Алматы",
+  ],
+});
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        id="ld-contact"
+        data={graph(
+          webPageNode({
+            path: PATH,
+            name: `Контакты ${business.name}`,
+            description: `${business.fullAddress}. ${business.hours}. ${business.phoneDisplay}.`,
+            type: "ContactPage",
+            crumbs: CRUMBS,
+          }),
+          breadcrumbNode(PATH, CRUMBS)
+        )}
+      />
       <PageHero
         eyebrow="Запись"
         title="Позвоните, напишите или оставьте заявку"
