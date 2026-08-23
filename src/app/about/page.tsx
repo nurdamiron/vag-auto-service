@@ -9,7 +9,7 @@ import { BadgeCheck } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "О нас",
-  description: `${business.name} — СТО VAG в Алматы. ${business.tagline}. ${business.fullAddress}.`,
+  description: `${business.name} — автосервис в Алматы, мкр. Таугуль. VW, Audi, Skoda, Porsche, Kia и Hyundai: диагностика, ремонт и малярка. Смета до работ, гарантия на выполненные работы.`,
 };
 
 const aboutImage =
@@ -22,8 +22,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="О сервисе"
-        title="VAG Auto Service — немцы и корейцы в одном боксе"
-        text={`${business.tagline}. Работаем в Алматы, мкр. Таугуль. Рейтинг ★ ${business.rating} и ${business.reviewCount}+ оценок на 2ГИС.`}
+        title="Сервис, куда едут после того, как в другом месте «не нашли»"
+        text={`Немцы и корейцы в одном боксе: диагностика, механика и малярка. Таугуль, Алматы. ★ ${business.rating} и ${business.reviewCount}+ оценок на 2ГИС.`}
         crumbs={[
           { href: "/", label: "Главная" },
           { label: "О нас" },
@@ -91,7 +91,7 @@ export default function AboutPage() {
               На чём держится сервис
             </h2>
           </Reveal>
-          <StaggerGrid className="mt-8 grid gap-4 md:grid-cols-3">
+          <StaggerGrid className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {whyUs.map((item) => (
               <StaggerItem key={item.num}>
                 <div className="surface-card h-full p-6">
@@ -122,8 +122,12 @@ export default function AboutPage() {
             </h2>
             <p className="mt-4 text-slate leading-relaxed">
               Концерн VAG — Volkswagen, Audi, Skoda, Porsche, Bentley. Плюс
-              отдельное направление по корейским маркам: Kia и Hyundai. И помощь
-              с подбором запчастей — это тоже отмечают клиенты.
+              отдельное направление по корейским маркам: Kia и Hyundai. Не
+              «универсальный гараж на всё подряд»: по этим маркам мы знаем
+              типовые болячки и держим под них оборудование.
+            </p>
+            <p className="mt-3 text-slate leading-relaxed">
+              {business.guarantee}
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {brands.map((b) => (

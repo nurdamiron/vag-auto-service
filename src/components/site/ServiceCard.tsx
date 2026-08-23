@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ArrowRight, SprayCan } from "lucide-react";
+import { ArrowRight, SearchCheck, Snowflake, SprayCan } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { SpotlightCard } from "@/components/motion/SpotlightCard";
 import type { Service } from "@/lib/data";
 
@@ -10,9 +11,16 @@ type Props = {
   size?: "compact" | "feature";
 };
 
+const PANEL_ICONS: Record<"spray" | "search" | "snow", LucideIcon> = {
+  spray: SprayCan,
+  search: SearchCheck,
+  snow: Snowflake,
+};
+
 export function ServiceCard({ service, index, size = "compact" }: Props) {
   const feature = size === "feature";
   const num = String(index + 1).padStart(2, "0");
+  const PanelIcon = service.panel ? PANEL_ICONS[service.panel.icon] : null;
 
   return (
     <SpotlightCard
@@ -33,10 +41,14 @@ export function ServiceCard({ service, index, size = "compact" }: Props) {
           <div className="absolute inset-0">
             <div className="stripes-ember absolute inset-0 transition-transform duration-700 ease-out group-hover:translate-x-3" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(234,90,30,0.4),transparent_62%)]" />
-            <SprayCan className="absolute bottom-5 left-5 h-11 w-11 text-white" />
-            <span className="type-display absolute bottom-6 left-20 text-lg uppercase tracking-[0.2em] text-white/70">
-              Малярка
-            </span>
+            {PanelIcon ? (
+              <PanelIcon className="absolute bottom-5 left-5 h-11 w-11 text-white" />
+            ) : null}
+            {service.panel ? (
+              <span className="type-display absolute bottom-6 left-20 text-lg uppercase tracking-[0.18em] text-white/70">
+                {service.panel.label}
+              </span>
+            ) : null}
           </div>
         )}
 
@@ -59,14 +71,12 @@ export function ServiceCard({ service, index, size = "compact" }: Props) {
         <p className="mt-2 flex-1 text-sm leading-relaxed text-slate">
           {service.short}
         </p>
-        <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
-          <span className="text-sm font-semibold text-orange">
-            {service.priceFrom}
+        {/* Вместо цены — момент, когда пора обращаться */}
+        <div className="mt-4 flex items-end justify-between gap-3 border-t border-border pt-4">
+          <span className="text-sm font-medium leading-snug text-orange">
+            {service.trigger}
           </span>
-          <span className="inline-flex items-center gap-1 text-sm font-medium text-navy group-hover:text-orange">
-            Подробнее
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-          </span>
+          <ArrowRight className="mb-0.5 h-4 w-4 shrink-0 text-navy transition-transform duration-300 group-hover:translate-x-1 group-hover:text-orange" />
         </div>
       </div>
     </SpotlightCard>

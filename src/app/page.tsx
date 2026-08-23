@@ -6,7 +6,7 @@ import {
   Clock,
   MapPin,
   Quote,
-  Shield,
+  SearchCheck,
   Star,
   Wrench,
 } from "lucide-react";
@@ -22,6 +22,9 @@ import { BrandCard } from "@/components/site/BrandCard";
 import { DiagAreas } from "@/components/site/DiagAreas";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { StatsStrip } from "@/components/site/StatsStrip";
+import { SymptomGrid } from "@/components/site/SymptomGrid";
+import { Objections } from "@/components/site/Objections";
+import { LocalContext } from "@/components/site/LocalContext";
 import {
   blogPosts,
   brandGroups,
@@ -52,13 +55,12 @@ export default function HomePage() {
       <section className="grain relative overflow-hidden bg-navy pt-[var(--header-h)]">
         <Image
           src={heroImage}
-          alt="VAG Auto Service — автосервис, диагностика и ремонт"
+          alt="VAG Auto Service — автосервис в Алматы"
           fill
           priority
           className="object-cover object-center"
           sizes="100vw"
         />
-        {/* Затемнение слева, чтобы текст читался поверх фото */}
         <div className="absolute inset-0 bg-gradient-to-r from-navy/88 via-navy/55 to-navy/25" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/10 to-navy/35" />
         <div className="grid-lines pointer-events-none absolute inset-0" />
@@ -73,15 +75,9 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={0.05}>
-              <h1 className="type-display mt-5 max-w-2xl text-3xl text-white sm:text-4xl md:text-5xl lg:text-[3.3rem] lg:leading-[1.06]">
+              <h1 className="type-display mt-5 max-w-2xl text-3xl text-white sm:text-4xl md:text-5xl lg:text-[3.1rem] lg:leading-[1.08]">
                 {heroCopy.titleLead}{" "}
-                {/* Запятая внутри nowrap-обёртки, иначе уезжает на новую строку */}
-                <span className="whitespace-nowrap">
-                  <span className="accent-underline">
-                    {heroCopy.titleAccent}
-                  </span>
-                  ,
-                </span>{" "}
+                <span className="accent-underline">{heroCopy.titleAccent}</span>{" "}
                 {heroCopy.titleTail}
               </h1>
             </Reveal>
@@ -95,10 +91,7 @@ export default function HomePage() {
             <Reveal delay={0.15}>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a href="#zapis" className="btn-primary lg:hidden">
-                  Записаться
-                </a>
-                <a href={telLink()} className="btn-secondary">
-                  {heroCopy.ctaSecondary} {business.phoneDisplay}
+                  Описать проблему
                 </a>
                 <a
                   href={waLink()}
@@ -108,6 +101,9 @@ export default function HomePage() {
                 >
                   {heroCopy.ctaPrimary}
                 </a>
+                <a href={telLink()} className="btn-secondary">
+                  {heroCopy.ctaSecondary} {business.phoneDisplay}
+                </a>
               </div>
             </Reveal>
 
@@ -115,19 +111,17 @@ export default function HomePage() {
               <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-sm text-white/70">
                 <span className="inline-flex items-center gap-2">
                   <Wrench className="h-4 w-4 text-orange" />
-                  VW · Audi · Skoda · Kia · Hyundai
+                  {heroCopy.meta}
                 </span>
-                <span className="inline-flex items-center gap-2">
-                  <Shield className="h-4 w-4 text-orange" />
-                  Смета до начала работ
-                </span>
+              </div>
+              <div className="mt-2.5 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-sm text-white/70">
                 <span className="inline-flex items-center gap-2">
                   <Clock className="h-4 w-4 text-orange" />
                   {business.hoursShort} каждый день
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-orange" />
-                  {business.address}
+                  {business.address}, Таугуль
                 </span>
               </div>
             </Reveal>
@@ -162,9 +156,40 @@ export default function HomePage() {
       <BrandMarquee />
 
       {/* ---------------------------------------------------------- */}
-      {/*  Диагностика по направлениям                                */}
+      {/*  Симптомы — вход на языке клиента                           */}
       {/* ---------------------------------------------------------- */}
       <section className="section-pad">
+        <div className="site-container">
+          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-14">
+            <Reveal from="left">
+              <SectionHeading
+                eyebrow={sectionsCopy.symptomsEyebrow}
+                title={sectionsCopy.symptomsTitle}
+                text={sectionsCopy.symptomsText}
+              />
+              <a
+                href={waLink(
+                  "Здравствуйте! Опишу проблему с машиной — подскажите, что это может быть."
+                )}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary mt-6 inline-flex"
+              >
+                Описать своими словами
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </Reveal>
+            <Reveal delay={0.05} from="right">
+              <SymptomGrid />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------- */}
+      {/*  Диагностика по направлениям                                */}
+      {/* ---------------------------------------------------------- */}
+      <section className="section-pad bg-bg">
         <div className="site-container">
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <Reveal>
@@ -194,7 +219,7 @@ export default function HomePage() {
       {/* ---------------------------------------------------------- */}
       {/*  Услуги                                                     */}
       {/* ---------------------------------------------------------- */}
-      <section className="section-pad bg-bg">
+      <section className="section-pad">
         <div className="site-container">
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <Reveal>
@@ -213,12 +238,47 @@ export default function HomePage() {
           </div>
 
           <StaggerGrid className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => (
+            {/* На главной — девять самых востребованных, остальные на /services */}
+            {services.slice(0, 9).map((s, i) => (
               <StaggerItem key={s.slug}>
                 <ServiceCard service={s} index={i} />
               </StaggerItem>
             ))}
           </StaggerGrid>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------- */}
+      {/*  Проверка перед покупкой — отдельный оффер                  */}
+      {/* ---------------------------------------------------------- */}
+      <section className="grain relative overflow-hidden bg-navy py-12 md:py-16">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,rgba(234,90,30,0.22),transparent_60%)]" />
+        <div className="site-container relative">
+          <Reveal>
+            <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex items-start gap-5">
+                <span className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-orange/15 text-orange sm:flex">
+                  <SearchCheck className="h-7 w-7" />
+                </span>
+                <div>
+                  <p className="eyebrow">{sectionsCopy.checkEyebrow}</p>
+                  <h2 className="type-display mt-2 text-2xl text-white sm:text-3xl">
+                    {sectionsCopy.checkTitle}
+                  </h2>
+                  <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base">
+                    {sectionsCopy.checkText}
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/services/pre-purchase-check"
+                className="btn-primary shrink-0"
+              >
+                Как это проходит
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -268,6 +328,99 @@ export default function HomePage() {
       </section>
 
       {/* ---------------------------------------------------------- */}
+      {/*  Возражения                                                 */}
+      {/* ---------------------------------------------------------- */}
+      <section className="section-pad bg-bg">
+        <div className="site-container">
+          <Reveal>
+            <SectionHeading
+              eyebrow={sectionsCopy.objectionsEyebrow}
+              title={sectionsCopy.objectionsTitle}
+              text={sectionsCopy.objectionsText}
+            />
+          </Reveal>
+          <div className="mt-10">
+            <Objections />
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------- */}
+      {/*  Как мы работаем                                            */}
+      {/* ---------------------------------------------------------- */}
+      <section className="grain relative overflow-hidden bg-navy text-white section-pad">
+        <div className="grid-lines pointer-events-none absolute inset-0" />
+        <div className="site-container relative">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <Reveal from="left">
+              <div>
+                <p className="eyebrow">{sectionsCopy.whyEyebrow}</p>
+                <h2 className="type-display mt-3 text-3xl sm:text-4xl md:text-[2.75rem]">
+                  {sectionsCopy.whyTitle}
+                </h2>
+                <p className="mt-4 text-base leading-relaxed text-white/70">
+                  {sectionsCopy.whyText}
+                </p>
+                <div className="group relative mt-8 aspect-[4/3] overflow-hidden rounded-2xl">
+                  <Image
+                    src={aboutImage}
+                    alt="Работа на VAG Auto Service"
+                    fill
+                    className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                    sizes="(min-width:1024px) 50vw, 100vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
+                </div>
+              </div>
+            </Reveal>
+
+            <div className="space-y-4">
+              {whyUs.map((item, i) => (
+                <Reveal key={item.num} delay={i * 0.06} from="right">
+                  <div className="surface-dark p-5 sm:p-6">
+                    <div className="flex items-start gap-4">
+                      <span className="type-numeral text-3xl text-orange">
+                        {item.num}
+                      </span>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-orange">
+                          {item.label}
+                        </p>
+                        <h3 className="type-display mt-1 text-xl sm:text-2xl">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-relaxed text-white/65 sm:text-base">
+                          {item.text}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------- */}
+      {/*  Алматинский контекст                                       */}
+      {/* ---------------------------------------------------------- */}
+      <section className="section-pad">
+        <div className="site-container">
+          <Reveal>
+            <SectionHeading
+              eyebrow={sectionsCopy.localEyebrow}
+              title={sectionsCopy.localTitle}
+              text={sectionsCopy.localText}
+            />
+          </Reveal>
+          <div className="mt-10">
+            <LocalContext />
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------- */}
       {/*  Почему к нам едут                                          */}
       {/* ---------------------------------------------------------- */}
       <section className="section-pad bg-bg">
@@ -306,63 +459,6 @@ export default function HomePage() {
       </section>
 
       {/* ---------------------------------------------------------- */}
-      {/*  Сервис, который шарит                                      */}
-      {/* ---------------------------------------------------------- */}
-      <section className="grain relative overflow-hidden bg-navy text-white section-pad">
-        <div className="grid-lines pointer-events-none absolute inset-0" />
-        <div className="site-container relative">
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <Reveal from="left">
-              <div>
-                <p className="eyebrow">{sectionsCopy.whyEyebrow}</p>
-                <h2 className="type-display mt-3 text-3xl sm:text-4xl md:text-[2.75rem]">
-                  {sectionsCopy.whyTitle}
-                </h2>
-                <p className="mt-4 text-base leading-relaxed text-white/70">
-                  {sectionsCopy.whyText}
-                </p>
-                <div className="group relative mt-8 aspect-[4/3] overflow-hidden rounded-2xl">
-                  <Image
-                    src={aboutImage}
-                    alt="Работа на VAG Auto Service"
-                    fill
-                    className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
-                    sizes="(min-width:1024px) 50vw, 100vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
-                </div>
-              </div>
-            </Reveal>
-
-            <div className="space-y-5">
-              {whyUs.map((item, i) => (
-                <Reveal key={item.num} delay={i * 0.06} from="right">
-                  <div className="surface-dark p-5 sm:p-6">
-                    <div className="flex items-start gap-4">
-                      <span className="type-numeral text-3xl text-orange">
-                        {item.num}
-                      </span>
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-orange">
-                          {item.label}
-                        </p>
-                        <h3 className="type-display mt-1 text-xl sm:text-2xl">
-                          {item.title}
-                        </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-white/65 sm:text-base">
-                          {item.text}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------------------------------------------------- */}
       {/*  Как попасть — таймлайн                                     */}
       {/* ---------------------------------------------------------- */}
       <section className="section-pad">
@@ -375,7 +471,6 @@ export default function HomePage() {
           </Reveal>
 
           <div className="relative mt-12">
-            {/* Линия таймлайна на десктопе */}
             <div
               aria-hidden
               className="absolute left-0 right-0 top-5 hidden h-px bg-gradient-to-r from-border via-orange/40 to-border lg:block"

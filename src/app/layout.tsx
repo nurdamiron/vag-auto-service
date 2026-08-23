@@ -4,7 +4,10 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { StickyCta } from "@/components/site/StickyCta";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import { Analytics } from "@/components/analytics/Analytics";
+import { ConversionTracking } from "@/components/analytics/ConversionTracking";
 import { brands, business, services } from "@/lib/data";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,13 +23,10 @@ const archivo = Archivo({
   display: "swap",
 });
 
-/** Домен проекта на Vercel; поменять, когда подключим свой */
-const SITE_URL = "https://vag-auto-service.vercel.app";
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${business.name} — диагностика, ремонт и малярка VW, Audi, Skoda, Kia, Hyundai в Алматы`,
+    default: `Автосервис в Алматы — ремонт VW, Audi, Skoda, Kia, Hyundai · ${business.name}`,
     template: `%s · ${business.name}`,
   },
   description: business.description,
@@ -42,6 +42,8 @@ export const metadata: Metadata = {
     "покраска авто Алматы",
     "ремонт ходовой Алматы",
     "ремонт АКПП Алматы",
+    "проверка авто перед покупкой Алматы",
+    "СТО Таугуль",
   ],
   openGraph: {
     title: `${business.name} — СТО в Алматы: VAG, Kia, Hyundai`,
@@ -118,6 +120,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <Analytics />
+        <ConversionTracking />
         <ScrollProgress />
         <Header />
         <main className="relative flex-1 pb-20 md:pb-0">{children}</main>

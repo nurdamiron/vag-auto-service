@@ -6,13 +6,14 @@ import { Reveal } from "@/components/motion/Reveal";
 import { StaggerGrid, StaggerItem } from "@/components/motion/Stagger";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { DiagAreas } from "@/components/site/DiagAreas";
+import { SymptomGrid } from "@/components/site/SymptomGrid";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { sectionsCopy, services } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Услуги",
   description:
-    "Электронно-компьютерная диагностика по мотору, ходовке, коробке и малярке, ремонт двигателя, КПП, электрики, малярные работы и ТО — VAG Auto Service, Алматы.",
+    "Диагностика по мотору, ходовке, коробке и малярке, ремонт двигателя и КПП, электрика, малярные работы, ТО и проверка авто перед покупкой — VAG Auto Service, Алматы, Таугуль.",
 };
 
 export default function ServicesPage() {
@@ -20,8 +21,8 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Услуги"
-        title="Диагностика, мотор, ходовая, коробка и малярка"
-        text="То, с чем реально приезжают: Check Engine, ABS, стук в подвеске, рывки коробки, течи, сколы и притёртые бампера. Смета — до работ."
+        title="Двенадцать направлений — и одно правило: сначала диагноз"
+        text="Check Engine, стук в подвеске, рывки коробки, течи, сколы и притёртые бампера. По каждому направлению смету называем до начала работ и даём гарантию на сделанное."
         crumbs={[{ href: "/", label: "Главная" }, { label: "Услуги" }]}
       />
 
@@ -38,6 +39,23 @@ export default function ServicesPage() {
       </section>
 
       <section className="section-pad">
+        <div className="site-container">
+          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-14">
+            <Reveal from="left">
+              <SectionHeading
+                eyebrow={sectionsCopy.symptomsEyebrow}
+                title={sectionsCopy.symptomsTitle}
+                text={sectionsCopy.symptomsText}
+              />
+            </Reveal>
+            <Reveal delay={0.05} from="right">
+              <SymptomGrid />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad bg-bg">
         <div className="site-container">
           <Reveal>
             <SectionHeading
