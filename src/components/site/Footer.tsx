@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { BrandLogo } from "@/components/site/BrandLogo";
 import { brands, business, nav, services, telLink, waLink } from "@/lib/data";
 
 export function Footer() {
@@ -128,8 +129,14 @@ export function Footer() {
               <Link
                 key={b.slug}
                 href={`/brands/${b.slug}`}
-                className="rounded-full border border-white/12 bg-white/5 px-3.5 py-1.5 text-sm text-white/75 transition-colors hover:border-orange/50 hover:text-orange"
+                className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-3 py-1.5 text-sm text-white/75 transition-colors hover:border-orange/50 hover:text-orange"
               >
+                <BrandLogo
+                  slug={b.slug}
+                  name={b.name}
+                  decorative
+                  className="h-4 w-8"
+                />
                 {b.name}
               </Link>
             ))}

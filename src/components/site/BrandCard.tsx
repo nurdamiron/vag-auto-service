@@ -1,10 +1,11 @@
 import { ArrowUpRight } from "lucide-react";
 import { SpotlightCard } from "@/components/motion/SpotlightCard";
+import { BrandLogo } from "@/components/site/BrandLogo";
 import type { Brand } from "@/lib/data";
 
 /**
- * Карточка марки. Без стоковых фото: вместо картинки — крупная буквенная
- * марка на фоне, чтобы сетка читалась как система, а не как каталог.
+ * Карточка марки. Официальный знак сверху — сетка читается как список
+ * брендов, а не как набор абстрактных букв.
  */
 export function BrandCard({ brand }: { brand: Brand }) {
   const korea = brand.group === "korea";
@@ -14,16 +15,17 @@ export function BrandCard({ brand }: { brand: Brand }) {
       href={`/brands/${brand.slug}`}
       className="surface-card surface-card-hover group relative flex h-full flex-col overflow-hidden p-6"
     >
-      {/* Буквенный водяной знак */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -right-3 -top-6 select-none font-display text-[7rem] font-extrabold leading-none tracking-tighter text-navy/[0.04] transition-transform duration-700 ease-out group-hover:scale-110 group-hover:text-orange/[0.09]"
-      >
-        {brand.name.charAt(0)}
-      </span>
+      <div className="flex h-14 items-center">
+        <BrandLogo
+          slug={brand.slug}
+          name={brand.name}
+          decorative
+          className="h-11 w-28 text-navy transition-colors duration-300 group-hover:text-orange"
+        />
+      </div>
 
       <span
-        className={`inline-flex w-fit items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider ${
+        className={`mt-4 inline-flex w-fit items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider ${
           korea
             ? "bg-orange/10 text-orange"
             : "bg-navy/[0.06] text-navy/70"
@@ -32,7 +34,7 @@ export function BrandCard({ brand }: { brand: Brand }) {
         {korea ? "Корея" : "VAG"}
       </span>
 
-      <h3 className="type-display mt-4 text-2xl text-navy">{brand.name}</h3>
+      <h3 className="type-display mt-3 text-2xl text-navy">{brand.name}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-slate">
         {brand.short}
       </p>

@@ -472,6 +472,15 @@
     animation-play-state: paused;
   }
 
+  /* Official brand marks: SVG is a mask, fill comes from currentColor */
+  .brand-logo {
+    display: inline-block;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask: var(--brand-logo) center / contain no-repeat;
+    mask: var(--brand-logo) center / contain no-repeat;
+  }
+
   /* -------------------------------------------------------------- */
   /*  Misc                                                           */
   /* -------------------------------------------------------------- */
