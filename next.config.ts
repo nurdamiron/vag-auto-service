@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   images: {
     // AVIF и WebP заметно легче JPEG — прямо влияет на LCP
     formats: ["image/avif", "image/webp"],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "inline",
+    contentSecurityPolicy:
+      "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
         protocol: "https",

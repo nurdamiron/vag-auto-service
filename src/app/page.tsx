@@ -664,10 +664,11 @@ export default function HomePage() {
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
                       src={post.image}
-                      alt={post.title}
+                      alt={post.coverAlt ?? post.title}
                       fill
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                       sizes="(min-width:768px) 33vw, 100vw"
+                      unoptimized={post.image.endsWith(".svg")}
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-5">

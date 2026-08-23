@@ -101,16 +101,31 @@ export function brandMarkdown(brand: Brand): string {
 }
 
 export function postMarkdown(post: BlogPost): string {
+  const sections = post.sections
+    .map((s) => `## ${s.heading}\n\n${s.paragraphs.join("\n\n")}`)
+    .join("\n\n");
+  const faqs = post.faqs.map((f) => `**${f.q}**\n\n${f.a}`).join("\n\n");
   return [
     `# ${post.title}`,
     "",
     `URL: ${absoluteUrl(`/blog/${post.slug}`)}`,
     `Дата публикации: ${post.dateIso}`,
     `Рубрика: ${post.category}`,
+    `Ключевой запрос: ${post.primaryKeyword}`,
     "",
     `> ${post.excerpt}`,
     "",
-    post.content.join("\n\n"),
+    post.lead.join("\n\n"),
+    "",
+    sections,
+    "",
+    "## Коротко",
+    "",
+    post.takeaways.map((t) => `- ${t}`).join("\n"),
+    "",
+    "## Вопросы и ответы",
+    "",
+    faqs,
   ].join("\n");
 }
 

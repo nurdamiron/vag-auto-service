@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1b2b"/>
+      <stop offset="1" stop-color="#16324c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g fill="#ea5a1e" opacity="0.18">
+      <circle cx="957" cy="157" r="4"/><circle cx="1054" cy="98" r="5"/><circle cx="1151" cy="69" r="6"/><circle cx="128" cy="314" r="7"/><circle cx="225" cy="437" r="8"/><circle cx="322" cy="238" r="4"/><circle cx="419" cy="399" r="5"/><circle cx="516" cy="157" r="6"/><circle cx="613" cy="98" r="7"/><circle cx="710" cy="69" r="8"/><circle cx="807" cy="314" r="4"/><circle cx="904" cy="437" r="5"/><circle cx="1001" cy="238" r="6"/><circle cx="1098" cy="399" r="7"/><circle cx="75" cy="157" r="8"/><circle cx="172" cy="98" r="4"/><circle cx="269" cy="69" r="5"/><circle cx="366" cy="314" r="6"/>
+    </g>
+  <rect x="0" y="618" width="1200" height="12" fill="#ea5a1e"/>
+  <text x="72" y="88" fill="#ea5a1e" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4">KIA / HYUNDAI</text>
+  <text x="72" y="200" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700"><tspan x="72" dy="0">Стойки стабилизатора на</tspan><tspan x="72" dy="55.199999999999996">Kia Rio: почему к 50</tspan><tspan x="72" dy="55.199999999999996">тысячам уже стучат</tspan></text>
+  <rect x="72" y="500" width="1056" height="2" fill="rgba(255,255,255,0.18)"/>
+  <text x="72" y="548" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">VAG Auto Service</text>
+  <text x="72" y="586" fill="rgba(255,255,255,0.7)" font-family="Arial, Helvetica, sans-serif" font-size="20">Таугуль, Алматы · +7 707 405 69 07</text>
+</svg>

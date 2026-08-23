@@ -38,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(p.dateIso),
     changeFrequency: "yearly",
     priority: 0.5,
-    images: [p.image],
+    images: [p.image.startsWith("http") ? p.image : absoluteUrl(p.image)],
   }));
 
   return [...staticPages, ...servicePages, ...brandPages, ...postPages];

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1b2b"/>
+      <stop offset="1" stop-color="#16324c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g fill="#ea5a1e" opacity="0.18">
+      <circle cx="277" cy="77" r="4"/><circle cx="374" cy="318" r="5"/><circle cx="471" cy="179" r="6"/><circle cx="568" cy="369" r="7"/><circle cx="665" cy="464" r="8"/><circle cx="762" cy="512" r="4"/><circle cx="859" cy="536" r="5"/><circle cx="956" cy="77" r="6"/><circle cx="1053" cy="318" r="7"/><circle cx="1150" cy="179" r="8"/><circle cx="127" cy="369" r="4"/><circle cx="224" cy="464" r="5"/><circle cx="321" cy="512" r="6"/><circle cx="418" cy="536" r="7"/><circle cx="515" cy="77" r="8"/><circle cx="612" cy="318" r="4"/><circle cx="709" cy="179" r="5"/><circle cx="806" cy="369" r="6"/>
+    </g>
+  <rect x="0" y="618" width="1200" height="12" fill="#ea5a1e"/>
+  <text x="72" y="88" fill="#ea5a1e" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4">АЛМАТЫ</text>
+  <text x="72" y="200" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700"><tspan x="72" dy="0">Качество топлива в Алматы:</tspan><tspan x="72" dy="55.199999999999996">нагар, лямбда, катализатор</tspan></text>
+  <rect x="72" y="500" width="1056" height="2" fill="rgba(255,255,255,0.18)"/>
+  <text x="72" y="548" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">VAG Auto Service</text>
+  <text x="72" y="586" fill="rgba(255,255,255,0.7)" font-family="Arial, Helvetica, sans-serif" font-size="20">Таугуль, Алматы · +7 707 405 69 07</text>
+</svg>
