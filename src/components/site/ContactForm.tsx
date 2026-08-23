@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { trackConversion } from "@/components/analytics/ConversionTracking";
 import { business, services, waLink } from "@/lib/data";
 
 type Props = {
@@ -41,6 +42,7 @@ export function ContactForm({
       .filter(Boolean)
       .join("\n");
 
+    trackConversion("form_submit", source);
     window.open(waLink(text), "_blank", "noopener,noreferrer");
     setSent(true);
   }
@@ -77,10 +79,10 @@ export function ContactForm({
         <div className="mb-1">
           <p className="eyebrow !normal-case !tracking-normal">Запись</p>
           <h2 className="type-display mt-1 text-xl text-navy sm:text-2xl">
-            Записаться на сервис
+            Опишите проблему
           </h2>
           <p className="mt-1.5 text-sm text-slate">
-            Ответим в WhatsApp · {business.hoursShort}
+            Диагноз знать не нужно. Ответим в WhatsApp · {business.hoursShort}
           </p>
         </div>
       ) : null}
@@ -123,7 +125,7 @@ export function ContactForm({
         <select
           name="service"
           className={inputClass}
-          defaultValue="Компьютерная диагностика"
+          defaultValue={services[0].title}
         >
           {services.map((s) => (
             <option key={s.slug} value={s.title}>
