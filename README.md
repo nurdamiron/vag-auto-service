@@ -1,6 +1,9 @@
-# VAG Auto Service
+# VAG Auto Service — vag-service.com
 
-Сайт автосервиса **VAG Auto Service** (Алматы) — клон дизайна Framer-шаблона [Camber](https://neat-room-613097.framer.app/) на **Next.js + React + Tailwind CSS**.
+Сайт автосервиса **VAG Auto Service** (Алматы) на **Next.js + React + Tailwind CSS**.
+Дизайн — по мотивам Framer-шаблона [Camber](https://neat-room-613097.framer.app/).
+
+Продовый домен: **https://vag-service.com**
 
 ## Данные бизнеса (2ГИС)
 
@@ -12,7 +15,7 @@
 
 ## Стек
 
-- Next.js (App Router)
+- Next.js 16 (App Router)
 - React 19
 - TypeScript
 - Tailwind CSS 4
@@ -32,21 +35,50 @@
 ## Запуск
 
 ```bash
-cd vag-auto-service
+cd vag-service
+cp .env.example .env.local     # при необходимости поправьте значения
 npm install
 npm run dev
 ```
 
 Откройте [http://localhost:3000](http://localhost:3000).
 
+## Переменные окружения
+
+Все — публичные (`NEXT_PUBLIC_*`), задаются в Vercel → Project → Settings → Environment Variables.
+Шаблон лежит в `.env.example`.
+
+| Переменная | Назначение | Обязательна |
+|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | Канонический адрес сайта. В коде дефолт `https://vag-service.com`, переменную задают только для превью и локалки | нет |
+| `NEXT_PUBLIC_GA_ID` | Google Analytics 4, `G-XXXXXXXXXX` | нет |
+| `NEXT_PUBLIC_YM_ID` | Номер счётчика Яндекс.Метрики | нет |
+| `NEXT_PUBLIC_GOOGLE_VERIFICATION` | `content` мета-тега Google Search Console | нет |
+| `NEXT_PUBLIC_YANDEX_VERIFICATION` | `content` мета-тега Яндекс.Вебмастера | нет |
+
+`SITE_URL` используется в `sitemap.xml`, `robots.txt`, canonical, Open Graph и Schema.org —
+менять домен в коде нужно только в `src/lib/site.ts` и `next.config.ts`.
+
+## Домен vag-service.com
+
+1. **DNS** (у регистратора домена):
+   - `A` `@` → `76.76.21.21`
+   - `CNAME` `www` → `cname.vercel-dns.com`
+2. **Vercel** → Project → Settings → Domains: добавить `vag-service.com` (Primary) и `www.vag-service.com`.
+3. Приложение само склеивает хосты на канонический (308) — см. `LEGACY_HOSTS` в `next.config.ts`:
+   `www.vag-service.com` и старый `vag-auto-service.vercel.app`.
+4. После выката: Google Search Console + Яндекс.Вебмастер — подтвердить домен,
+   положить код в `NEXT_PUBLIC_*_VERIFICATION` и отправить `https://vag-service.com/sitemap.xml`.
+
 ## Структура
 
 ```
 src/
-  app/                 # страницы: /, /services, /about, /blog, /contact
+  app/                 # страницы: /, /services, /brands, /about, /blog, /contact
   components/site/     # Header, Footer, forms, FAQ…
-  components/motion/   # Reveal, Stagger
+  components/motion/   # Reveal, Stagger, ScrollProgress
   lib/data.ts          # контент и контакты
+  lib/site.ts          # домен и счётчики
 ```
 
 ## Скрипты
@@ -56,4 +88,4 @@ src/
 - `npm run start` — запуск production  
 - `npm run lint` — ESLint  
 
-Контент и цены в `src/lib/data.ts` — правьте под актуальный прайс сервиса.
+Контент и цены — в `src/lib/`, правьте под актуальный прайс сервиса.

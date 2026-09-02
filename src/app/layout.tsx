@@ -7,7 +7,11 @@ import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { Analytics } from "@/components/analytics/Analytics";
 import { ConversionTracking } from "@/components/analytics/ConversionTracking";
 import { brands, business, services } from "@/lib/data";
-import { SITE_URL } from "@/lib/site";
+import {
+  SITE_URL,
+  GOOGLE_VERIFICATION,
+  YANDEX_VERIFICATION,
+} from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -54,6 +58,10 @@ export const metadata: Metadata = {
     type: "website",
   },
   alternates: { canonical: "/" },
+  verification: {
+    ...(GOOGLE_VERIFICATION ? { google: GOOGLE_VERIFICATION } : {}),
+    ...(YANDEX_VERIFICATION ? { yandex: YANDEX_VERIFICATION } : {}),
+  },
 };
 
 /** Schema.org: карточка сервиса + каталог услуг и марок */
