@@ -1,0 +1,56 @@
+# VAG Auto Service
+
+> Автосервис в Алматы: компьютерная диагностика, ремонт двигателя, ходовой,
+> коробки, электрика и малярные работы. Volkswagen, Audi, Skoda, Porsche, Bentley,
+> Kia, Hyundai. Смета до начала работ, гарантия на выполненные работы.
+
+## Контакты
+
+- Телефон / WhatsApp: +7 707 405 69 07
+- Email: baigozy@mail.ru
+- Адрес: ул. Цветочная, 1/1, бокс 8, мкр. Таугуль, Ауэзовский район, Алматы
+- Режим работы: ежедневно с 10:00 до 20:00
+- 2ГИС: https://2gis.kz/almaty/firm/70000001068542185 (рейтинг 4.8, 105+ оценок)
+- Сайт: https://vag-service.com/
+- Sitemap: https://vag-service.com/sitemap.xml
+
+## Ключевые факты
+
+- Марки: Volkswagen, Audi, Skoda, Porsche, Bentley, Kia, Hyundai.
+- Оплата: наличные, перевод на карту, оплата через банк, QR-код.
+- Смета согласуется с клиентом до начала работ.
+- Гарантия на выполненные работы (срок — по конкретному ремонту).
+
+## Услуги
+
+- [Электронно-компьютерная диагностика](https://vag-service.com/services/computer-diagnostics)
+- [Ремонт двигателя и ГРМ](https://vag-service.com/services/engine-repair)
+- [Ремонт ходовой и рулевого](https://vag-service.com/services/chassis-suspension)
+- [Тормозная система](https://vag-service.com/services/brakes)
+- [Коробка: МКПП, автомат, DSG и DCT](https://vag-service.com/services/transmission-clutch)
+- [Малярные и кузовные работы](https://vag-service.com/services/body-paint)
+- [Сход-развал](https://vag-service.com/services/wheel-alignment)
+- [Кондиционер и климат](https://vag-service.com/services/air-conditioning)
+- [Электрика и электроника](https://vag-service.com/services/electrics)
+- [Охлаждение и выхлоп](https://vag-service.com/services/cooling-exhaust)
+- [Проверка авто перед покупкой](https://vag-service.com/services/pre-purchase-check)
+- [ТО и замена масла](https://vag-service.com/services/oil-service)
+
+## Марки
+
+- [Volkswagen](https://vag-service.com/brands/volkswagen)
+- [Audi](https://vag-service.com/brands/audi)
+- [Skoda](https://vag-service.com/brands/skoda)
+- [Porsche](https://vag-service.com/brands/porsche)
+- [Bentley](https://vag-service.com/brands/bentley)
+- [Kia](https://vag-service.com/brands/kia)
+- [Hyundai](https://vag-service.com/brands/hyundai)
+
+## Основные страницы
+
+- [Главная](https://vag-service.com/)
+- [Услуги](https://vag-service.com/services)
+- [Марки](https://vag-service.com/brands)
+- [О нас](https://vag-service.com/about)
+- [Советы (блог)](https://vag-service.com/blog)
+- [Запись](https://vag-service.com/contact)
