@@ -54,6 +54,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   alternates: { canonical: "/" },
+  verification: {
+    yandex: "15a0711604ac5e08",
+  },
 };
 
 /** Schema.org: карточка сервиса + каталог услуг и марок */
