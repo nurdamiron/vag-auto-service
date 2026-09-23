@@ -7,6 +7,8 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { blogPosts, getPost, business, telLink } from "@/lib/data";
 
+const SITE_URL = "https://www.vag-service.kz";
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
@@ -28,10 +30,52 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPost(slug);
   if (!post) notFound();
 
-  const related = blogPosts.filter((p) => p.slug !== slug).slice(0, 2);
+  const sameCategory = blogPosts.filter(
+    (p) => p.slug !== slug && p.category === post.category
+  );
+  const others = blogPosts.filter(
+    (p) => p.slug !== slug && p.category !== post.category
+  );
+  const related = [...sameCategory, ...others].slice(0, 4);
+
+  const postUrl = `${SITE_URL}/blog/${post.slug}`;
+  const blogPostingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.dateIso,
+    dateModified: post.dateIso,
+    url: postUrl,
+    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+    image: post.image,
+    author: { "@type": "Organization", name: business.name },
+    publisher: { "@type": "Organization", name: business.name },
+  };
+  const faqJsonLd = post.faqs.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: post.faqs.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+      }
+    : null;
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+      />
+      {faqJsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      ) : null}
       <PageHero
         eyebrow={post.category}
         title={post.title}
@@ -65,6 +109,12 @@ export default async function BlogPostPage({ params }: Props) {
             >
               {post.date}
             </time>
+            <p
+              id="short-answer"
+              className="mt-6 rounded-2xl border border-orange/30 bg-orange/5 p-5 text-base leading-relaxed text-navy sm:p-6 sm:text-lg"
+            >
+              <strong>Коротко.</strong> {post.answer}
+            </p>
             <div className="prose-site mt-6 space-y-4">
               {post.content.map((p) => (
                 <p key={p.slice(0, 40)} className="text-base leading-relaxed text-slate sm:text-lg">
@@ -73,6 +123,22 @@ export default async function BlogPostPage({ params }: Props) {
               ))}
             </div>
           </Reveal>
+
+          {post.faqs.length ? (
+            <Reveal delay={0.08}>
+              <div className="mt-10">
+                <h2 className="type-display text-2xl text-navy">Частые вопросы</h2>
+                <div className="mt-4 space-y-5">
+                  {post.faqs.map((item) => (
+                    <div key={item.q}>
+                      <h3 className="type-display text-lg text-navy">{item.q}</h3>
+                      <p className="mt-1 text-base leading-relaxed text-slate">{item.a}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ) : null}
 
           <Reveal delay={0.1}>
             <div className="mt-10 rounded-2xl bg-navy p-6 text-white sm:p-8">
