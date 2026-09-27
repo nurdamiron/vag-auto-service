@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Марки",
   description:
     "Volkswagen, Audi, Skoda, Porsche, Bentley, Kia и Hyundai — диагностика, ремонт и малярные работы в VAG Auto Service, Алматы.",
+  alternates: { canonical: "/brands" },
 };
 
 export default function BrandsPage() {

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Советы",
   description:
     "Диагностика VAG, ABS на Passat/Golf, сцепление и КПП — полезно до визита на СТО в Алматы.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogPage() {

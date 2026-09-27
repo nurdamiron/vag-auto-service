@@ -11,6 +11,7 @@ import { BadgeCheck } from "lucide-react";
 export const metadata: Metadata = {
   title: "О нас",
   description: `${business.name} — автосервис в Алматы, мкр. Таугуль. VW, Audi, Skoda, Porsche, Kia и Hyundai: диагностика, ремонт и малярка. Смета до работ, гарантия на выполненные работы.`,
+  alternates: { canonical: "/about" },
 };
 
 const aboutImage =

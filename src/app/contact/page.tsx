@@ -8,6 +8,7 @@ import { business, telLink, waLink } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Контакты",
   description: `Адрес, телефон и запись в ${business.name}: ${business.fullAddress}, ${business.phoneDisplay}.`,
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

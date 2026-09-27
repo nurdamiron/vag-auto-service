@@ -22,6 +22,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
+    // Без своего canonical пост наследовал "/" из layout и сам объявлял себя
+    // дублем главной.
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      url: `/blog/${post.slug}`,
+    },
   };
 }
 

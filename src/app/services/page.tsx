@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Услуги",
   description:
     "Диагностика по мотору, ходовке, коробке и малярке, ремонт двигателя и КПП, электрика, малярные работы, ТО и проверка авто перед покупкой — VAG Auto Service, Алматы, Таугуль.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {
