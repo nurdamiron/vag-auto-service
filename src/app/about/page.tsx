@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { StaggerGrid, StaggerItem } from "@/components/motion/Stagger";
@@ -8,11 +9,11 @@ import { BrandLogo } from "@/components/site/BrandLogo";
 import { brands, business, whyUs, trustBadges, waLink } from "@/lib/data";
 import { BadgeCheck } from "lucide-react";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "О нас",
   description: `${business.name} — автосервис в Алматы, мкр. Таугуль. VW, Audi, Skoda, Porsche, Kia и Hyundai: диагностика, ремонт и малярка. Смета до работ, гарантия на выполненные работы.`,
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 const aboutImage =
   "https://framerusercontent.com/images/JvlMrZBpxG3mmlVw12DVl8epGw.jpg";

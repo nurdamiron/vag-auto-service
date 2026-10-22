@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check, Phone } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
@@ -30,11 +31,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const brand = getBrand(slug);
   if (!brand) return { title: "Марка" };
 
-  return {
+  return pageMeta({
     title: `Ремонт ${brand.name} в Алматы`,
     description: `${brand.name} в VAG Auto Service, Алматы: электронно-компьютерная диагностика по мотору, ходовке, коробке и малярке, ремонт и ТО. ${brand.short}.`,
-    alternates: { canonical: `/brands/${brand.slug}` },
-  };
+    path: `/brands/${brand.slug}`,
+  });
 }
 
 export default async function BrandPage({ params }: Props) {

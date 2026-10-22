@@ -8,6 +8,7 @@ import { Analytics } from "@/components/analytics/Analytics";
 import { ConversionTracking } from "@/components/analytics/ConversionTracking";
 import { brands, business, services } from "@/lib/data";
 import { SITE_URL } from "@/lib/site";
+import { OG_IMAGE } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -52,22 +53,14 @@ export const metadata: Metadata = {
     siteName: business.name,
     locale: "ru_KZ",
     type: "website",
-    images: [
-      {
-        url: "/images/hero-auto-service.jpg",
-        width: 1280,
-        height: 720,
-        alt: `${business.name} — автосервис в Алматы`,
-      },
-    ],
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: `${business.name} — СТО в Алматы: VAG, Kia, Hyundai`,
     description: business.description,
-    images: ["/images/hero-auto-service.jpg"],
+    images: [OG_IMAGE.url],
   },
-  alternates: { canonical: "/" },
   verification: {
     yandex: "15a0711604ac5e08",
   },

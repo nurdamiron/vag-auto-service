@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { Clock, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { ContactForm } from "@/components/site/ContactForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { business, telLink, waLink } from "@/lib/data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Контакты",
   description: `Адрес, телефон и запись в ${business.name}: ${business.fullAddress}, ${business.phoneDisplay}.`,
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

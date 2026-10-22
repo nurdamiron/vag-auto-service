@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
@@ -19,19 +20,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return { title: "Статья" };
-  return {
+  return pageMeta({
     title: post.title,
     description: post.excerpt,
-    // Без своего canonical пост наследовал "/" из layout и сам объявлял себя
-    // дублем главной.
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: "article",
-      url: `/blog/${post.slug}`,
-    },
-  };
+    path: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.dateIso,
+  });
 }
 
 export default async function BlogPostPage({ params }: Props) {

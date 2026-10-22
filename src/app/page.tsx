@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -45,6 +46,11 @@ import {
 const heroImage = "/images/hero-auto-service.jpg";
 const aboutImage =
   "https://framerusercontent.com/images/g4JKIXKxUHdkYwtBbzHXNpFaPdg.jpg";
+
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   return (

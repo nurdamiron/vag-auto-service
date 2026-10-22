@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check, SearchCheck, Snowflake, SprayCan } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -34,11 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = getService(slug);
   if (!service) return { title: "Услуга" };
 
-  return {
+  return pageMeta({
     title: `${service.title} в Алматы`,
     description: `${service.short} ${business.name}, ${business.district}. Смета до начала работ, гарантия на выполненные работы.`,
-    alternates: { canonical: `/services/${service.slug}` },
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: Props) {

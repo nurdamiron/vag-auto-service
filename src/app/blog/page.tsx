@@ -1,17 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { StaggerGrid, StaggerItem } from "@/components/motion/Stagger";
 import { blogPosts } from "@/lib/data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Советы",
   description:
     "Диагностика VAG, ABS на Passat/Golf, сцепление и КПП — полезно до визита на СТО в Алматы.",
-  alternates: { canonical: "/blog" },
-};
+  path: "/blog",
+});
 
 export default function BlogPage() {
   return (

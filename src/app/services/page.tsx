@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
@@ -10,12 +11,12 @@ import { SymptomGrid } from "@/components/site/SymptomGrid";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { sectionsCopy, services } from "@/lib/data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Услуги",
   description:
     "Диагностика по мотору, ходовке, коробке и малярке, ремонт двигателя и КПП, электрика, малярные работы, ТО и проверка авто перед покупкой — VAG Auto Service, Алматы, Таугуль.",
-  alternates: { canonical: "/services" },
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

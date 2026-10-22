@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
@@ -10,12 +11,12 @@ import { DiagAreas } from "@/components/site/DiagAreas";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { brandGroups, brands, brandsByGroup, sectionsCopy } from "@/lib/data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Марки",
   description:
     "Volkswagen, Audi, Skoda, Porsche, Bentley, Kia и Hyundai — диагностика, ремонт и малярные работы в VAG Auto Service, Алматы.",
-  alternates: { canonical: "/brands" },
-};
+  path: "/brands",
+});
 
 export default function BrandsPage() {
   return (
