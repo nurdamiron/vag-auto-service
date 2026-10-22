@@ -52,6 +52,20 @@ export const metadata: Metadata = {
     siteName: business.name,
     locale: "ru_KZ",
     type: "website",
+    images: [
+      {
+        url: "/images/hero-auto-service.jpg",
+        width: 1280,
+        height: 720,
+        alt: `${business.name} — автосервис в Алматы`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${business.name} — СТО в Алматы: VAG, Kia, Hyundai`,
+    description: business.description,
+    images: ["/images/hero-auto-service.jpg"],
   },
   alternates: { canonical: "/" },
   verification: {
