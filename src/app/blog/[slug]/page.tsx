@@ -107,12 +107,10 @@ export default async function BlogPostPage({ params }: Props) {
           </Reveal>
 
           <Reveal delay={0.05}>
-            <time
-              dateTime={post.dateIso}
-              className="mt-6 block text-sm font-medium text-slate"
-            >
-              {post.date}
-            </time>
+            <p className="mt-6 text-sm font-medium text-slate">
+              <time dateTime={post.dateIso}>{post.date}</time>
+              <span> · Команда {business.name}</span>
+            </p>
             <p
               id="short-answer"
               className="mt-6 rounded-2xl border border-orange/30 bg-orange/5 p-5 text-base leading-relaxed text-navy sm:p-6 sm:text-lg"
