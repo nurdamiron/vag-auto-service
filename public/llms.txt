@@ -11,8 +11,8 @@
 - Адрес: ул. Цветочная, 1/1, бокс 8, мкр. Таугуль, Ауэзовский район, Алматы
 - Режим работы: ежедневно с 10:00 до 20:00
 - 2ГИС: https://2gis.kz/almaty/firm/70000001068542185 (рейтинг 4.8, 105+ оценок)
-- Сайт: https://vag-service.com/
-- Sitemap: https://vag-service.com/sitemap.xml
+- Сайт: https://www.vag-service.kz/
+- Sitemap: https://www.vag-service.kz/sitemap.xml
 
 ## Ключевые факты
 
@@ -23,34 +23,40 @@
 
 ## Услуги
 
-- [Электронно-компьютерная диагностика](https://vag-service.com/services/computer-diagnostics)
-- [Ремонт двигателя и ГРМ](https://vag-service.com/services/engine-repair)
-- [Ремонт ходовой и рулевого](https://vag-service.com/services/chassis-suspension)
-- [Тормозная система](https://vag-service.com/services/brakes)
-- [Коробка: МКПП, автомат, DSG и DCT](https://vag-service.com/services/transmission-clutch)
-- [Малярные и кузовные работы](https://vag-service.com/services/body-paint)
-- [Сход-развал](https://vag-service.com/services/wheel-alignment)
-- [Кондиционер и климат](https://vag-service.com/services/air-conditioning)
-- [Электрика и электроника](https://vag-service.com/services/electrics)
-- [Охлаждение и выхлоп](https://vag-service.com/services/cooling-exhaust)
-- [Проверка авто перед покупкой](https://vag-service.com/services/pre-purchase-check)
-- [ТО и замена масла](https://vag-service.com/services/oil-service)
+- [Электронно-компьютерная диагностика](https://www.vag-service.kz/services/computer-diagnostics)
+- [Ремонт двигателя и ГРМ](https://www.vag-service.kz/services/engine-repair)
+- [Ремонт ходовой и рулевого](https://www.vag-service.kz/services/chassis-suspension)
+- [Тормозная система](https://www.vag-service.kz/services/brakes)
+- [Коробка: МКПП, автомат, DSG и DCT](https://www.vag-service.kz/services/transmission-clutch)
+- [Малярные и кузовные работы](https://www.vag-service.kz/services/body-paint)
+- [Сход-развал](https://www.vag-service.kz/services/wheel-alignment)
+- [Кондиционер и климат](https://www.vag-service.kz/services/air-conditioning)
+- [Электрика и электроника](https://www.vag-service.kz/services/electrics)
+- [Охлаждение и выхлоп](https://www.vag-service.kz/services/cooling-exhaust)
+- [Проверка авто перед покупкой](https://www.vag-service.kz/services/pre-purchase-check)
+- [ТО и замена масла](https://www.vag-service.kz/services/oil-service)
 
 ## Марки
 
-- [Volkswagen](https://vag-service.com/brands/volkswagen)
-- [Audi](https://vag-service.com/brands/audi)
-- [Skoda](https://vag-service.com/brands/skoda)
-- [Porsche](https://vag-service.com/brands/porsche)
-- [Bentley](https://vag-service.com/brands/bentley)
-- [Kia](https://vag-service.com/brands/kia)
-- [Hyundai](https://vag-service.com/brands/hyundai)
+- [Volkswagen](https://www.vag-service.kz/brands/volkswagen)
+- [Audi](https://www.vag-service.kz/brands/audi)
+- [Skoda](https://www.vag-service.kz/brands/skoda)
+- [Porsche](https://www.vag-service.kz/brands/porsche)
+- [Bentley](https://www.vag-service.kz/brands/bentley)
+- [Kia](https://www.vag-service.kz/brands/kia)
+- [Hyundai](https://www.vag-service.kz/brands/hyundai)
 
 ## Основные страницы
 
-- [Главная](https://vag-service.com/)
-- [Услуги](https://vag-service.com/services)
-- [Марки](https://vag-service.com/brands)
-- [О нас](https://vag-service.com/about)
-- [Советы (блог)](https://vag-service.com/blog)
-- [Запись](https://vag-service.com/contact)
+- [Главная](https://www.vag-service.kz/)
+- [Услуги](https://www.vag-service.kz/services)
+- [Марки](https://www.vag-service.kz/brands)
+- [О нас](https://www.vag-service.kz/about)
+- [Советы (блог)](https://www.vag-service.kz/blog)
+
+## Блог: темы статей
+
+Блог отвечает на вопросы владельцев Audi, VW, Skoda, Porsche, Kia и Hyundai в Алматы. Каждая статья начинается с короткого ответа и заканчивается блоком вопросов и ответов. Темы: запуск и аккумулятор зимой, коды ошибок (P0xxx, U0xxx), симптомы (стуки, рывки, дым, лампы на панели), модели и моторы, коробки DSG и АКПП, ТО и расходники, покупка и проверка автомобиля, кузов и электрика.
+
+Полный список статей: https://www.vag-service.kz/sitemap.xml
+- [Запись](https://www.vag-service.kz/contact)

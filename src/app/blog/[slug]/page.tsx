@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: `/blog/${post.slug}`,
     type: "article",
     publishedTime: post.dateIso,
+    image: post.image,
   });
 }
 
