@@ -1523,7 +1523,9 @@ const newPosts: BlogPost[] = [
   },
 ];
 
-export const blogPosts: BlogPost[] = [...existingPosts, ...newPosts];
+import { generatedPosts } from "./blog-generated";
+
+export const blogPosts: BlogPost[] = [...existingPosts, ...newPosts, ...generatedPosts];
 
 export function getPost(slug: string) {
   return blogPosts.find((p) => p.slug === slug);
